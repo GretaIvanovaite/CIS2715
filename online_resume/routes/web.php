@@ -10,13 +10,16 @@ use App\Http\Controllers\AdminExperiencesController;
 
 Route::get('/', [HomeController::class, 'index']);
 Route::get('/about/', [AboutMeController::class, 'index']);
-Route::get('/skills/', [SkillsController::class, 'index']);
+Route::get('/skills/', [SkillsController::class, 'index'])->name('skills');
 Route::get('/contact/', [ContactController::class, 'index']);
 //Route::get('/skills/create', [AdminSkillsController::class, 'create'])->name('skills.create');
 //Route::post('/skills/submit', [AdminSkillsController::class, 'store'])->name('skills.store');
 Route::prefix('admin')->group(function(){
     Route::get('/skills/create', [AdminSkillsController::class, 'create'])->name('skills.create');
+    Route::get('/skills/show', [AdminSkillsController::class, 'index'])->name('skills.show');
     Route::post('/skills/submit', [AdminSkillsController::class, 'store'])->name('skills.store');
     Route::get('/experiences/create', [AdminExperiencesController::class, 'create'])->name('experiences.create');
     Route::post('/experiences/submit', [AdminExperiencesController::class, 'store'])->name('experiences.store');
+    Route::get('/skills/{skill}/edit', [AdminSkillsController::class, 'edit'])->name('skills.edit');
+    Route::patch('/skills/{skill}', [AdminSkillsController::class, 'update'])->name('skills.update');
 });

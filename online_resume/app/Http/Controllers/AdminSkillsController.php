@@ -13,7 +13,8 @@ class AdminSkillsController extends Controller
      */
     public function index()
     {
-        //
+        $skills = skill::all();
+        return view('admin.skills.show', ['skills' => $skills]);
     }
 
     /**
@@ -57,7 +58,7 @@ class AdminSkillsController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(Skill $skill)
     {
         return view('admin.skills.edit', compact('skill'));
     }
@@ -65,9 +66,10 @@ class AdminSkillsController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(SkillRequest $request, Skill $skill)
     {
-        //
+        $skill->update($request->validated());
+        return redirect()->route('skills')->with('success', 'Skill updated successfully.');
     }
 
     /**
