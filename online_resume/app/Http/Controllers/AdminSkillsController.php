@@ -75,8 +75,9 @@ class AdminSkillsController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(Skill $skill)
     {
-        //
+        $skill->delete();
+        return redirect()->route('skills.show')->with('success', 'Skill deleted successfully!');
     }
 }

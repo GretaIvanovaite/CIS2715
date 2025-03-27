@@ -49,6 +49,11 @@
                             </td>
                             <td class="p-4 flex space-x-2 justify-center">
                                 <a href="{{ route('skills.edit', $skill->id) }}" class="bg-cyan-900 text-white py-3 px-6 rounded-lg font-semibold hover:bg-blue-700 transition">Update</a>
+                                <form action="{{ route('skills.destroy', $skill->id) }}" method="POST" onsubmit="return confirm('Are you sure you want to delete this skill?');">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button type="submit" class="bg-red-500 text-white py-3 px-6 rounded-lg font-semibold hover:bg-red-700 transition">Delete</button>
+                                </form>
                             </td>
                         </tr>
                     @endforeach

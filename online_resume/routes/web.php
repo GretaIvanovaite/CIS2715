@@ -22,4 +22,5 @@ Route::prefix('admin')->group(function(){
     Route::post('/experiences/submit', [AdminExperiencesController::class, 'store'])->name('experiences.store');
     Route::get('/skills/{skill}/edit', [AdminSkillsController::class, 'edit'])->name('skills.edit');
     Route::patch('/skills/{skill}', [AdminSkillsController::class, 'update'])->name('skills.update');
+    Route::delete('/skills/{skill}', [AdminSkillsController::class, 'destroy'])->name('skills.destroy');
 });
