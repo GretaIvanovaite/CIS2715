@@ -13,6 +13,7 @@ class SkillsTableSeeder extends Seeder
      */
     public function run(): void
     {
+        DB::table('skills')->truncate();
         DB::table('skills')->insert([
             ['title' => 'PHP',
             'detail' => 'Learning to code PHP using vanilla and frameworks like Laravel',

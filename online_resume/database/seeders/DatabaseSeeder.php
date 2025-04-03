@@ -16,6 +16,7 @@ class DatabaseSeeder extends Seeder
         $this -> call([
             SkillsTableSeeder::class,
             ExperiencesTableSeeder::class,
+            InstituteTableSeeder::class,
             QualificationsTableSeeder::class,
         ]);
     }

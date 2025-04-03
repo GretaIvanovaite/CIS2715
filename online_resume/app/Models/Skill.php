@@ -9,5 +9,9 @@ class Skill extends Model
 {
     use HasFactory;
     //Define which columns can be mass-assigned
-    protected $fillable = ['title', 'detail', 'stars'];
+    protected $fillable = [
+        'title',
+        'detail',
+        'stars'
+    ];
 }

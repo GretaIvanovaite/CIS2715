@@ -13,19 +13,12 @@ class QualificationsTableSeeder extends Seeder
      */
     public function run(): void
     {
+        DB::table('qualifications')->truncate();
         DB::table('qualifications')->insert([
-            ['course_title' => 'Microsoft Office Specialist: Excel Associate (Microsoft 365 Apps)',
-            'completion_year' => 2024,
-            'studied_at' => 'Edge Hill University',
+            ['course_title' => 'BSc Web Design, Development and Analytics',
+            'completion_year' => 2026,
+            'institute_id' => 1,
             'grade' => 'passed'],
-            ['course_title' => 'Microsoft Certified: Security, Compliance, and Identity Fundamentals',
-            'completion_year' => 2024,
-            'studied_at' => 'Edge Hill University',
-            'grade' => 'passed'],
-            ['course_title' => 'Access to Higher Education diploma',
-            'completion_year' => 2020,
-            'studied_at' => 'Distancelearningcentre.Com Ltd',
-            'grade' => 'distinction'],
         ]);
     }
 }

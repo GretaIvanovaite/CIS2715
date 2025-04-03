@@ -76,7 +76,7 @@
                 @foreach ($qualifications as $qualification)
                     <tr class="divide-x-2 border-y-2 border-solid divide-3 divide-solid">
                         <td class="p-4">{{$qualification->course_title}}</td>
-                        <td class="p-4">{{$qualification->studied_at}}</td>
+                        <td class="p-4">{{$qualification->institute->name}}</td>
                         <td class="p-4">{{$qualification->completion_year}}</td>
                         <td class="p-4">{{ucfirst($qualification->grade)}}</td>
                 @endforeach

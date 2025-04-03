@@ -23,4 +23,5 @@ Route::prefix('admin')->group(function(){
     Route::get('/skills/{skill}/edit', [AdminSkillsController::class, 'edit'])->name('skills.edit');
     Route::patch('/skills/{skill}', [AdminSkillsController::class, 'update'])->name('skills.update');
     Route::delete('/skills/{skill}', [AdminSkillsController::class, 'destroy'])->name('skills.destroy');
+    Route::get('/institutes/show', [AdminInstitutesController::class, 'index'])->name('institutes.show');
 });

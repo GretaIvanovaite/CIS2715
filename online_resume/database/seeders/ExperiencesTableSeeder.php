@@ -13,6 +13,7 @@ class ExperiencesTableSeeder extends Seeder
      */
     public function run(): void
     {
+        DB::table('experiences')->truncate();
         DB::table('experiences')->insert([
             ['job_title' => 'Associate Content Engineer',
             'start_date' => '2021-08-16',
