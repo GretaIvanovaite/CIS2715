@@ -17,9 +17,15 @@ final class ViewProjectsCest
     // Write your tests here. All `public` methods will be executed as tests.
     public function seeProjectsSection(AcceptanceTester $I)
     {
+        $project = $I->haveInDatabase('projects', [
+            'title' => 'Test Project',
+            'description' => 'Description:',
+            'technologies' => 'Technologies:',
+        ]);
+
         $I->amOnPage('/projects');
         $I->see('Software Projects', 'h1');
-        $I->see('Project Title 1');
+        $I->see('Test Project');
         $I->see('Description:');
         $I->see('Technologies:');
     }

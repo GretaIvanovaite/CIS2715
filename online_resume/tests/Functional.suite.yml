@@ -10,6 +10,11 @@ modules:
     enabled:
         - Laravel:
             environment_file: .env.testing
-        - Asserts
+        - Asserts:
+        - Db:
+            dsn: 'mysql:host=172.18.0.3;dbname=aboutme'
+            user: 'root'
+            password: 'password'
+            cleanup: false
         # add a framework module here
 step_decorators: ~

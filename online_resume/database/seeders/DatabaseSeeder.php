@@ -18,6 +18,7 @@ class DatabaseSeeder extends Seeder
             ExperiencesTableSeeder::class,
             InstituteTableSeeder::class,
             QualificationsTableSeeder::class,
+            ProjectsTableSeeder::class,
         ]);
     }
 }

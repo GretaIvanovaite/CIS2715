@@ -3,22 +3,22 @@
 declare(strict_types=1);
 
 
-namespace Tests\Acceptance;
+namespace Tests\Functional;
 
-use Tests\Support\AcceptanceTester;
+use Tests\Support\FunctionalTester;
 
 final class ViewProjectsCest
 {
-    public function _before(AcceptanceTester $I): void
+    public function _before(FunctionalTester $I): void
     {
         // Code here will be executed before each test.
     }
 
-    public function seeProjectsSection(AcceptanceTester $I)
+    public function seeProjectsSection(FunctionalTester $I)
     {
         $project = $I->haveInDatabase('projects', [
-            'title' => 'Test Skill',
-            'description' => "Example Project Description",
+            'title' => 'Test Project',
+            'description' => 'Example Project Description',
             'technologies' => 'Laravel, Eloquent, Blade, HTML, CSS',
         ]);
 
@@ -26,12 +26,12 @@ final class ViewProjectsCest
 
         $I->amOnPage('/projects');
         $I->see('Software Projects', 'h1');
-        $I->see('Test Skill', 'h2');
+        $I->see('Test Project', 'h2');
         $I->see('Example Project Description', 'p');
         $I->see('Laravel, Eloquent, Blade, HTML, CSS', 'p');
     }
 
-    public function seeNoProjectsMessage(AcceptanceTester $I)
+    public function seeNoProjectsMessage(FunctionalTester $I)
     {
         $I->amOnPage('/projects');
         $I->see('Software Projects', 'h1');

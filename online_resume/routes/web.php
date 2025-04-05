@@ -7,10 +7,12 @@ use App\Http\Controllers\SkillsController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\AdminSkillsController;
 use App\Http\Controllers\AdminExperiencesController;
+use App\Http\Controllers\ProjectController;
 
 Route::get('/', [HomeController::class, 'index']);
 Route::get('/about/', [AboutMeController::class, 'index']);
 Route::get('/skills/', [SkillsController::class, 'index'])->name('skills');
+Route::get('/projects/', [ProjectController::class, 'index'])->name('projects');
 Route::get('/contact/', [ContactController::class, 'index']);
 //Route::get('/skills/create', [AdminSkillsController::class, 'create'])->name('skills.create');
 //Route::post('/skills/submit', [AdminSkillsController::class, 'store'])->name('skills.store');
