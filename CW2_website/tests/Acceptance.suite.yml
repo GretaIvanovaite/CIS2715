@@ -16,7 +16,7 @@ modules:
             dsn: 'mysql:host=172.18.0.3;dbname=cw2'
             user: 'root'
             password: 'password'
-            cleanup: false
+            cleanup: true
 # Add Codeception\Step\Retry trait to AcceptanceTester to enable retries
 step_decorators:
     - Codeception\Step\ConditionalAssertion
