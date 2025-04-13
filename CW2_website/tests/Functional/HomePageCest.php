@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace Tests\Functional;
 use Tests\Support\FunctionalTester;
+use App\Models\Questionnaire;
+use App\Models\User;
 
 final class HomePageCest
 {
@@ -16,7 +18,7 @@ final class HomePageCest
     public function correctViewLoaded(FunctionalTester $I)
     {
         $I->amOnPage('/index');
-        $I->see('Home', h1);
+        $I->see('Home', 'h1');
     }
 
     public function containsExpectedKeywords(FunctionalTester $I)
@@ -43,13 +45,15 @@ final class HomePageCest
 
     public function seeQuestionnairesSection(FunctionalTester $I)
     {
-        $questionnaire = $I->haveInDatabase('questionnaire', [
+        User::factory()->create([
+            'id' => 1,
+        ]);
+        Questionnaire::factory()->create([
             'title' => 'Test Questionnaire',
             'description' => 'Example Questionnaire Description',
             'status' => 'In development',
+            'user_id' => 1,
         ]);
-
-        $I->seeInDatabase('questionnaire', ['id' => $questionnaire]);
 
         $I->amOnPage('/index');
         $I->see('Available questionnaires', 'h2');

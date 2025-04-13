@@ -2,20 +2,50 @@
 
 declare(strict_types=1);
 
-
 namespace Tests\Functional;
-
 use Tests\Support\FunctionalTester;
 
 final class LoginPageCest
 {
-    public function _before(FunctionalTester $I): void
+    public function routeExists(FunctionalTester $I)
     {
-        // Code here will be executed before each test.
+        $I->amOnPage('/login');
+        $I->seeResponseCodeIs(200);
     }
 
-    public function tryToTest(FunctionalTester $I): void
+    public function correctViewLoaded(FunctionalTester $I)
     {
-        // Write your tests here. All `public` methods will be executed as tests.
+        $I->amOnPage('/login');
+        $I->see('Login', 'h1');
+    }
+
+    public function containsExpectedKeywords(FunctionalTester $I)
+    {
+        $I->amOnPage('/login');
+        $I->see('Please Login');
+        $I->see('username');
+        $I->see('username');
+    }
+
+    public function pageHasValidHtml(FunctionalTester $I)
+    {
+        $I->amOnPage('/login');
+        $I->seeElement('html');
+        $I->seeElement('nav');
+        $I->seeElement('body');
+        $I->seeElement('footer');
+    }
+
+    public function csrfTokenExists(FunctionalTester $I)
+    {
+        $I->amOnPage('/login');
+        $I->seeInSource('csrf-token');
+    }
+
+    public function seeLoginForm(FunctionalTester $I)
+    {
+        $I->amOnPage('/login');
+        $I->see('<form');
+        $I->see('<button');
     }
 }

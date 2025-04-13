@@ -4,18 +4,30 @@ declare(strict_types=1);
 
 
 namespace Tests\Acceptance;
-
 use Tests\Support\AcceptanceTester;
+use App\Models\User;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Auth;
 
 final class LoginCest
 {
     public function _before(AcceptanceTester $I): void
     {
-        // Code here will be executed before each test.
+        $user = $I->haveInDatabase('users', [
+            'name' => 'Test User',
+            'email' => 'testuser@gmail.com',
+            'password' => Hash::make('password'),
+        ]);
     }
 
-    public function tryToTest(AcceptanceTester $I): void
+    public function tryToLogin(AcceptanceTester $I)
     {
-        // Write your tests here. All `public` methods will be executed as tests.
+        $I->amOnPage('/login');
+        $I->see('<form');
+        $I->submitForm('#login_form', array(
+            'user' => array(
+            'email' => 'testuser@gmail.com',
+            'password' => Hash::make('password'),
+        )), 'submitButton');
     }
 }
