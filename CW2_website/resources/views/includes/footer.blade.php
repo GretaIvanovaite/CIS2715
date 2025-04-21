@@ -6,7 +6,7 @@
     </section>
     <section id="second_nav">
         <ul>
-            <li><a href= "/">Home<a/></li>
+            <li><a href= "/">Home</a></li>
             <li><a href= "">link2</a></li>
         </ul>
     </section>

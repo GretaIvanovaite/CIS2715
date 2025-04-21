@@ -15,7 +15,7 @@ class Questionnaire extends Model
         'status',
     ];
 
-    public function institute(){
+    public function user(){
         return $this->belongsTo(User::class);
     }
 }

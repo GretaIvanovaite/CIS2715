@@ -22,7 +22,7 @@ class HomePageTest extends Unit
         public function testPageTitleIsHome()
     {
         $view = view('home')->render();
-        $this->assertStringContainsString('<title>Home</title>', $view);
+        $this->assertStringContainsString('<title>Questionnaire website - Home</title>', $view);
     }
 
     public function testPageHasNoForm()
