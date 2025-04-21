@@ -24,7 +24,7 @@ final class HomePageCest
     public function containsExpectedKeywords(FunctionalTester $I)
     {
         $I->amOnPage('/index');
-        $I->see('Welcome');
+        $I->see('Home');
         $I->see('questionnaires');
     }
 

@@ -5,7 +5,7 @@
 
 
 @section('main-content')
- <h2>Welcome to Greta's questionnaire website!</h2>
+ <h2>Available questionnaires</h2>
     <section id='questionnaires'>
         @forelse ($questionnaires as $questInstance)
             <a href="">

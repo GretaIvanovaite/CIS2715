@@ -13,16 +13,16 @@ class HomePageTest extends Unit
         $this->assertNotNull($routeCollection->getByName('home'));
     }
 
-    public function testStaticHeadingExistsInView()
-    {
-        $view = view('home')->render();
-        $this->assertStringContainsString("Welcome to Greta's questionnaire website!", $view);
-    }
-
         public function testPageTitleIsHome()
     {
         $view = view('home')->render();
         $this->assertStringContainsString('<title>Questionnaire website - Home</title>', $view);
+    }
+
+    public function testStaticHeadingExistsInView()
+    {
+        $view = view('home')->render();
+        $this->assertStringContainsString("Available questionnaires", $view);
     }
 
     public function testPageHasNoForm()
