@@ -13,10 +13,10 @@ modules:
             environment_file: .env.testing
             cleanup: false
         - Db:
-            dsn: 'mysql:host=172.18.0.3;dbname=cw2'
+            dsn: 'mysql:host=172.18.0.2;dbname=cw2_testing'
             user: 'root'
             password: 'password'
-            cleanup: true
+            cleanup: false
 # Add Codeception\Step\Retry trait to AcceptanceTester to enable retries
 step_decorators:
     - Codeception\Step\ConditionalAssertion

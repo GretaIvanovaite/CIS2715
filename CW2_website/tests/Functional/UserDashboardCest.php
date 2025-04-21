@@ -6,6 +6,7 @@ declare(strict_types=1);
 namespace Tests\Functional;
 use Tests\Support\FunctionalTester;
 use App\Models\Questionnaire;
+use App\Models\User;
 
 final class UserDashboardCest
 {
