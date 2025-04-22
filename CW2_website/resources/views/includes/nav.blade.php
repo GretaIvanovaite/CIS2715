@@ -1,12 +1,14 @@
-<h1>@yield('h1-title')</h1>
+<h1 class="text-2xl self-center">@yield('h1-title')</h1>
 <nav>
-    <ul>
-        <li><a href="/">Home</a></li>
+    <ul class="flex justify-around text-lg">
+        @if (Route::currentRouteName() !== 'home')
+            <li class="hover:bg-darkgreen hover:text-white px-2 py-4 active:bg-brightgreen active:text-black"><a href="/">Home</a></li>
+        @endif
         @guest
-        <li><a href="/login">Login</a></li>
+            <li class="hover:bg-darkgreen hover:text-white px-2 py-4 active:bg-brightgreen active:text-black"><a href="/login">Login</a></li>
         @endguest
         @auth
-        <li><a href="/user/dashboard">User Dashboard</a></li>
+            <li class="hover:bg-darkgreen hover:text-white px-2 py-4 active:bg-brightgreen active:text-black"><a href="/user/dashboard">User Dashboard</a></li>
         @endauth
     </ul>
 </nav>

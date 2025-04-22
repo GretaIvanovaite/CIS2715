@@ -12,12 +12,12 @@
     <style></style>
     @endif
 </head>
-<body>
-    <header>
+<body class="min-h-screen flex flex-col justify-between">
+    <header class="flex justify-between bg-mediumgreen font-semibold px-10 text-center">
         @include('includes.nav')
     </header>
 
-    <main>
+    <main class="bg-lightgreen mx-20 p-8 flex-1">
         @yield('main-content')
     </main>
    
