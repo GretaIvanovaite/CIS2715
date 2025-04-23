@@ -9,7 +9,7 @@ class HomeController extends Controller
 {
     public function index()
     {
-        $questionnaires = questionnaire::all();
+        $questionnaires = questionnaire::where('status', '=', 'Live')->get();
         return view('home')->with('questionnaires', $questionnaires);
     }
 }

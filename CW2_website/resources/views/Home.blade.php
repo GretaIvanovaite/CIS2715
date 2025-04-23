@@ -5,14 +5,14 @@
 
 
 @section('main-content')
- <h2 class="text-xl pb-8 font-bold">Available questionnaires</h2>
-    <section id='questionnaires'>
+ <h2 class="text-xl pb-4 m-2 font-bold">Available questionnaires</h2>
+    <section id='questionnaires' class="grid grid-cols-1 md:grid-cols-3 min-w-auto">
         @forelse ($questionnaires as $questInstance)
-            <article class="bg-white shadow-xl flex flex-col p-8 rounded-2xl max-w-1/3">
+            <article class="bg-white shadow-xl flex flex-col p-8 rounded-2xl m-2 min-w-auto">
                 <h3 class="text-lg font-semibold pb-4 pr-4">{{$questInstance->title}}</h3>
                 <p class="text-base">{{$questInstance->description}}</p>
                 <p class="text-base font-bold py-4">Status: {{$questInstance->status}}</p>
-                <button class="cursor-pointer bg-brightgreen text-black max-w-4/5 font-bold text-base uppercase rounded-lg p-4 hover:bg-darkgreen hover:text-white active:scale-95 transition-transform transform m-2 self-center">Take questionnaire!</button>
+                <button class="cursor-pointer bg-brightgreen text-black font-semibold text-base uppercase rounded-lg p-2 hover:bg-darkgreen hover:text-white active:scale-95 transition-transform transform m-2 self-center min-w-auto max-w-9/10">Take questionnaire!</button>
             </article>
         @empty
             <p>No questionnaires available at this time</p>
