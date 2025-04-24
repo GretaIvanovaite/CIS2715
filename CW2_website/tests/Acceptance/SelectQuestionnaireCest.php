@@ -25,7 +25,7 @@ final class SelectQuestionnaireCest
         $I->haveInDatabase('questionnaires', [
             'title' => 'Test Questionnaire',
             'description' => 'Example Questionnaire Description',
-            'status' => 'In development',
+            'status' => 'Live',
             'user_id' => 1,
         ]);
 
@@ -34,7 +34,7 @@ final class SelectQuestionnaireCest
         $I->see('Available questionnaires', 'h2');
         $I->see('Test Questionnaire', 'h3');
         $I->see('Example Questionnaire Description', 'p');
-        $I->see('In development', 'p');
+        $I->see('Live', 'p');
     }
 
     public function selectQuestionnaire(AcceptanceTester $I){

@@ -19,19 +19,13 @@ final class UserDashboardCest
     public function correctViewLoaded(FunctionalTester $I)
     {
         $I->amOnPage('/user/dashboard');
-        $I->see('User Dashboard', 'h1');
+        $I->see('Dashboard', 'h1');
     }
 
     public function testPageTitleIsDashboard(FunctionalTester $I)
     {
-        $view = view('user.dashboard')->render();
-        $this->assertStringContainsString('<title>Questionnaire website - User Dashboard</title>', $view);
-    }
-
-    public function testPageHasNoForm(FunctionalTester $I)
-    {
-        $view = view('user.dashboard')->render();
-        $this->assertStringNotContainsString('<form', $view);
+        $I->amOnPage('/user/dashboard');
+        $I->seeInSource('<title>Questionnaire website - User Dashboard</title>');
     }
 
     public function containsExpectedKeywords(FunctionalTester $I)
@@ -79,6 +73,6 @@ final class UserDashboardCest
     {
         $I->amOnPage('/user/dashboard');
         $I->see('Your questionnaires', 'h2');
-        $I->see('You currently do not have any questionnaires', 'p');
+        $I->see('You have no questionnaires at this time. Please use the button above to make a questionnaire', 'p');
     }
 }

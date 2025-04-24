@@ -16,7 +16,7 @@ class LoginPageTest extends Unit
     public function testPageTitleIsLogin()
     {
         $view = view('login')->render();
-        $this->assertStringContainsString('<title>Login</title>', $view);
+        $this->assertStringContainsString('<title>Questionnaire website - Login</title>', $view);
     }
 
     public function testPageHasNoForm()

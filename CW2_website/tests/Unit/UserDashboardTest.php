@@ -10,6 +10,6 @@ class UserDashboardTest extends Unit
     public function testNamedRouteExists()
     {
         $routeCollection = app('router')->getRoutes();
-        $this->assertNotNull($routeCollection->getByName('user.dashboard'));
+        $this->assertNotNull($routeCollection->getByName('dashboard'));
     }
 }

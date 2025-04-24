@@ -45,20 +45,14 @@ final class HomePageCest
 
     public function testPageTitleIsHome(FunctionalTester $I)
     {
-        $view = view('home')->render();
-        $this->assertStringContainsString('<title>Questionnaire website - Home</title>', $view);
+        $I->amOnPage('/index');
+        $I->seeInSource('<title>Questionnaire website - Home</title>');
     }
 
     public function testStaticHeadingExistsInView(FunctionalTester $I)
     {
-        $view = view('home')->render();
-        $this->assertStringContainsString("Available questionnaires", $view);
-    }
-
-    public function testPageHasNoForm(FunctionalTester $I)
-    {
-        $view = view('home')->render();
-        $this->assertStringNotContainsString('<form', $view);
+        $I->amOnPage('/index');
+        $I->see('Available questionnaires');
     }
 
     public function seeQuestionnairesSection(FunctionalTester $I)

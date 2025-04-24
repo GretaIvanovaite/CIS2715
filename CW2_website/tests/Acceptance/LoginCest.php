@@ -24,7 +24,7 @@ final class LoginCest
     public function tryToLogin(AcceptanceTester $I)
     {
         $I->amOnPage('/login');
-        $I->see('<form');
+        $I->seeElement('form');
         $I->submitForm('#login_form', array(
             'user' => array(
             'email' => 'testuser@gmail.com',
@@ -36,12 +36,12 @@ final class LoginCest
     public function incorrectPassword(AcceptanceTester $I)
     {
         $I->amOnPage('/login');
-        $I->see('<form');
+        $I->seeElement('form');
         $I->submitForm('#login_form', array(
             'user' => array(
             'email' => 'testuser@gmail.com',
             'password' => Hash::make('passwor'),
         )), 'submitButton');
-        $I->see('Incorrect details');
+        $I->see('Incorrect details provided');
     }
 }
