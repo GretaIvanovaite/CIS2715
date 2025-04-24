@@ -7,3 +7,4 @@ use App\Http\Controllers\LoginController;
 Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::get('/index', [HomeController::class, 'index'])->name('home');
 Route::get('/login', [LoginController::class, 'index'])->name('login');
+Route::get('/signup', [LoginController::class, 'create'])->name('signup');

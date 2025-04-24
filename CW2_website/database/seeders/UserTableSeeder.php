@@ -15,6 +15,7 @@ class UserTableSeeder extends Seeder
     {
         User::factory()->create([
             'id' => 1,
+            'password' => 'testPassword1!?',
         ]);
     }
 }
