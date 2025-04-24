@@ -11,5 +11,5 @@ Route::get('/login', [LoginController::class, 'index'])->name('login');
 Route::get('/signup', [LoginController::class, 'create'])->name('signup');
 
 Route::prefix('user')->group(function(){
-    Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+    Route::get('/dashboard', [LoginController::class, 'authenticate'])->name('dashboard');
 });
