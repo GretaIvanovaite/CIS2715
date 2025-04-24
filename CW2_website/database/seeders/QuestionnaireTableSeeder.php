@@ -17,5 +17,10 @@ class QuestionnaireTableSeeder extends Seeder
             'status' => 'Live',
             'user_id' => 1,
         ]);
+
+        Questionnaire::factory()->create([
+            'status' => 'In development',
+            'user_id' => 1,
+        ]);
     }
 }

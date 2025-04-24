@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('questionnaires', function (Blueprint $table) {
             $table->increments('id')->unsigned();
             $table->string('title');
-            $table->string('description');
+            $table->longtext('description');
             $table->string('status');
             $table->unsignedInteger('user_id');
                 $table->foreign('user_id')->references('id')->on('users');
