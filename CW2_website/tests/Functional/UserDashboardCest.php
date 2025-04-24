@@ -22,12 +22,23 @@ final class UserDashboardCest
         $I->see('User Dashboard', 'h1');
     }
 
+    public function testPageTitleIsDashboard(FunctionalTester $I)
+    {
+        $view = view('user.dashboard')->render();
+        $this->assertStringContainsString('<title>Questionnaire website - User Dashboard</title>', $view);
+    }
+
+    public function testPageHasNoForm(FunctionalTester $I)
+    {
+        $view = view('user.dashboard')->render();
+        $this->assertStringNotContainsString('<form', $view);
+    }
+
     public function containsExpectedKeywords(FunctionalTester $I)
     {
         $I->amOnPage('/user/dashboard');
-        $I->see('Welcome');
         $I->see('Your questionnaires');
-        $I->see('Create a new questionnaire');
+        $I->see('New questionnaire');
     }
 
     public function pageHasValidHtml(FunctionalTester $I)

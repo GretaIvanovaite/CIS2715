@@ -22,9 +22,9 @@ final class LoginPageCest
     public function containsExpectedKeywords(FunctionalTester $I)
     {
         $I->amOnPage('/login');
-        $I->see('Please Login');
-        $I->see('username');
-        $I->see('username');
+        $I->see('Please enter your login details');
+        $I->see('Email');
+        $I->see('Password');
     }
 
     public function pageHasValidHtml(FunctionalTester $I)
@@ -45,7 +45,7 @@ final class LoginPageCest
     public function seeLoginForm(FunctionalTester $I)
     {
         $I->amOnPage('/login');
-        $I->see('<form');
-        $I->see('<button');
+        $I->seeElement('form');
+        $I->seeElement('button');
     }
 }

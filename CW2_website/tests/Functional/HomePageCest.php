@@ -43,6 +43,24 @@ final class HomePageCest
         $I->seeInSource('csrf-token');
     }
 
+    public function testPageTitleIsHome(FunctionalTester $I)
+    {
+        $view = view('home')->render();
+        $this->assertStringContainsString('<title>Questionnaire website - Home</title>', $view);
+    }
+
+    public function testStaticHeadingExistsInView(FunctionalTester $I)
+    {
+        $view = view('home')->render();
+        $this->assertStringContainsString("Available questionnaires", $view);
+    }
+
+    public function testPageHasNoForm(FunctionalTester $I)
+    {
+        $view = view('home')->render();
+        $this->assertStringNotContainsString('<form', $view);
+    }
+
     public function seeQuestionnairesSection(FunctionalTester $I)
     {
         User::factory()->create([
@@ -51,7 +69,7 @@ final class HomePageCest
         Questionnaire::factory()->create([
             'title' => 'Test Questionnaire',
             'description' => 'Example Questionnaire Description',
-            'status' => 'In development',
+            'status' => 'Live',
             'user_id' => 1,
         ]);
 
@@ -59,7 +77,7 @@ final class HomePageCest
         $I->see('Available questionnaires', 'h2');
         $I->see('Test Questionnaire', 'h3');
         $I->see('Example Questionnaire Description', 'p');
-        $I->see('In development', 'p');
+        $I->see('Live', 'p');
     }
 
     public function seeNoQuestionnairesMessage(FunctionalTester $I)
