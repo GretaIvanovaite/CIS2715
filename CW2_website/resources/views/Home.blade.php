@@ -15,7 +15,7 @@
                 <button class="cursor-pointer bg-brightgreen text-black font-semibold text-base uppercase rounded-lg p-2 hover:bg-darkgreen hover:text-white active:scale-95 transition-transform transform m-2 self-center min-w-auto max-w-9/10">Take questionnaire!</button>
             </article>
         @empty
-            <p>No questionnaires available at this time</p>
+            <p class="m-2">No questionnaires available at this time</p>
         @endforelse
     </section>
 @endsection
