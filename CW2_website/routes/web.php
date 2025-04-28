@@ -17,7 +17,8 @@ Route::get('/signup', [UserController::class, 'create'])->name('signup');
 
 Route::get('/user/dashboard/', [DashboardController::class, 'index'])->name('dashboard');
 
-Route::get('/questionnaires/show', [QuestionnaireController::class, 'show'])->name('questionnaires.show');
+Route::get('/questionnaires/{questionnaire}', [QuestionnaireController::class, 'show'])->name('questionnaires.show');
+
 
 Route::controller(QuestionnaireController::class)->group(function () {
     Route::get('/questionnaires/create', 'create')->name('questionnaire.create');
