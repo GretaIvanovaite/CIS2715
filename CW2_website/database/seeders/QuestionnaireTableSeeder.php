@@ -13,13 +13,7 @@ class QuestionnaireTableSeeder extends Seeder
      */
     public function run(): void
     {
-        Questionnaire::factory()->count(5)->create([
-            'status' => 'Live',
-            'user_id' => 1,
-        ]);
-
-        Questionnaire::factory()->create([
-            'status' => 'In development',
+        Questionnaire::factory()->count(10)->create([
             'user_id' => 1,
         ]);
     }

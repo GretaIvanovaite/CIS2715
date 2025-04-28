@@ -16,10 +16,11 @@ class QuestionnaireFactory extends Factory
      */
     public function definition(): array
     {
+        $acceptedStatus = ['In development', 'Live', 'Closed'];
         return [
             'title' => $this->faker->sentence(),
             'description' => $this->faker->paragraph(),
-            'status' => $this->faker->sentence(),
+            'status' => $this->faker->randomElement($acceptedStatus),
         ];
     }
 }
