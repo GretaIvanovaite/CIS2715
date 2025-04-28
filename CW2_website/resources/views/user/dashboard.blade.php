@@ -1,4 +1,4 @@
-@extends('layouts.user')
+@extends('layouts.main')
 
 @section('page-title', 'Questionnaire website - User Dashboard')
 @section ('h1-title', 'Dashboard')
@@ -7,9 +7,6 @@
 @section('main-content')
  <h2 class="text-xl pb-4 m-2 font-bold">Your questionnaires</h2>
     @if ($questionnaires->isEmpty())
-        @php
-            $display='hidden'
-        @endphp
         <section class="flex justify-between">
             <a class="cursor-pointer bg-brightgreen text-black font-semibold text-base uppercase rounded-lg p-2 hover:bg-darkgreen hover:text-white active:scale-95 transition-transform transform m-2 self-center min-w-auto max-w-9/10" href="{{ route('questionnaire.create') }}>New questionnaire</a>
         </section>
@@ -47,6 +44,7 @@
                                 <td class="text-base text-center p-2">{{$questInstance->status}}</td>
                                 <td class="text-base text-center p-2"> Responses </td>
                                 <td class="text-base p-2 justify-items-center flex flex-col">
+                                    <a class="cursor-pointer bg-brightgreen text-black font-semibold text-base uppercase rounded-lg p-2 hover:bg-darkgreen hover:text-white hover:font-bold active:scale-95 transition-transform transform m-2 self-center min-w-3/5 max-w-9/10 text-center" href="{{ route('questionnaire.show', $questInstance->id) }}">Respondent view</a>
                                     @if ($questInstance->status == 'Live')
                                         <form action="{{ route('questionnaire.update',$questInstance->id) }}" method="POST" onsubmit="return confirm('Are you sure you want to close this questionnaire to responders?');" class="w-full flex justify-center">
                                         @csrf

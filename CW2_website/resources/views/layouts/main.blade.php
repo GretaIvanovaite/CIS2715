@@ -17,7 +17,7 @@
         @include('includes.nav')
     </header>
 
-    <main class="bg-lightgreen mx-20 p-8 flex-1">
+    <main class="bg-lightgreen mx-10 md:mx-30 p-8 flex-1">
         @yield('main-content')
     </main>
    
