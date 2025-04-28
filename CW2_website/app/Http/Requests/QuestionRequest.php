@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class QuestionnaireRequest extends FormRequest
+class QuestionRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -21,11 +21,10 @@ class QuestionnaireRequest extends FormRequest
      */
     public function rules(): array
     {
-        $acceptedStatus = ['In development', 'Live', 'Closed'];
+        $acceptedTypes = ['Short text', 'Long text', 'Multi-choice', 'Scale'];
         return [
-            'title' => 'required|string|max:255',
-            'detail' => 'nullable|string',
-            'status' => ['required', Rule::in($acceptedStatus)],
+            'text' => 'required|string|max:255',
+            'type' => ['required', Rule::in($acceptedTypes)],
         ];
     }
 }
