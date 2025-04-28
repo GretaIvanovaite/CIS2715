@@ -10,20 +10,20 @@
         @php
             $display='hidden'
         @endphp
-        <section id='buttons' class="flex justify-between">
-            <button class="cursor-pointer bg-brightgreen text-black font-semibold text-base uppercase rounded-lg p-2 hover:bg-darkgreen hover:text-white active:scale-95 transition-transform transform m-2 self-center min-w-auto max-w-9/10">New questionnaire</button>
+        <section class="flex justify-between">
+            <a class="cursor-pointer bg-brightgreen text-black font-semibold text-base uppercase rounded-lg p-2 hover:bg-darkgreen hover:text-white active:scale-95 transition-transform transform m-2 self-center min-w-auto max-w-9/10" href="{{ route('questionnaire.create') }}>New questionnaire</a>
         </section>
-        <p class="m-2">You have no questionnaires at this time. Please use the button above to make a questionnaire</p>
+        <p class="m-2">You have no questionnaires at this time.</p>
     @else
-        <section id='buttons' class="flex justify-between">
-            <button class="cursor-pointer bg-brightgreen text-black font-semibold text-base uppercase rounded-lg p-2 hover:bg-darkgreen hover:text-white hover:font-bold active:scale-95 transition-transform transform m-2 self-center min-w-auto max-w-9/10">New questionnaire</button>
+        <section class="flex justify-between">
+            <a class="cursor-pointer bg-brightgreen text-black font-semibold text-base uppercase rounded-lg p-2 hover:bg-darkgreen hover:text-white hover:font-bold active:scale-95 transition-transform transform m-2 self-center min-w-auto max-w-9/10" href="{{ route('questionnaire.create') }}">New questionnaire</a>
             <div id="toggle-switch" class="flex m-2">
-                <button class="cursor-pointer w-full min-w-fit py-1.5 my-auto px-3 text-sm bg-darkgreen text-white gap-2 rounded-lg justify-center">
+                <a class="cursor-pointer w-full min-w-fit py-1.5 my-auto px-3 text-sm bg-darkgreen text-white gap-2 rounded-lg justify-center">
                     <span>Grid view</span>
-                </button>
-                <button class="cursor-pointer flex flex-row w-full min-w-fit py-1.5 my-auto px-3 text-sm bg-mediumgreen text-black gap-2 rounded-lg justify-center">
+                </a>
+                <a class="cursor-pointer flex flex-row w-full min-w-fit py-1.5 my-auto px-3 text-sm bg-mediumgreen text-black gap-2 rounded-lg justify-center">
                     <span>Table view</span>
-                </button>
+                </a>
             </div>
         </section>
         <section id='questionnaires_table'>
@@ -48,16 +48,29 @@
                                 <td class="text-base text-center p-2"> Responses </td>
                                 <td class="text-base p-2 justify-items-center flex flex-col">
                                     @if ($questInstance->status == 'Live')
-                                        <button class="cursor-pointer bg-brightgreen text-black font-semibold text-base uppercase rounded-lg p-2 hover:bg-darkgreen hover:text-white hover:font-bold active:scale-95 transition-transform transform m-2 self-center min-w-3/5 max-w-9/10">Stop responses</button>
+                                        <form action="{{ route('questionnaire.update',$questInstance->id) }}" method="POST" onsubmit="return confirm('Are you sure you want to close this questionnaire to responders?');" class="w-full flex justify-center">
+                                        @csrf
+                                        @method('PATCH')
+                                            <input type="hidden" name="status" value="Closed">
+                                            <button class="cursor-pointer bg-brightgreen text-black font-semibold text-base uppercase rounded-lg p-2 hover:bg-darkgreen hover:text-white hover:font-bold active:scale-95 transition-transform transform m-2 self-center min-w-3/5 max-w-9/10 text-center">Stop responses</button>
+                                        </form>
                                     @else
-                                        <button class="cursor-pointer bg-brightgreen text-black font-semibold text-base uppercase rounded-lg p-2 hover:bg-darkgreen hover:text-white hover:font-bold active:scale-95 transition-transform transform m-2 self-center min-w-3/5 max-w-9/10">Make Live</button>
-                                        <button class="cursor-pointer bg-brightgreen text-black font-semibold text-base uppercase rounded-lg p-2 hover:bg-darkgreen hover:text-white hover:font-bold active:scale-95 transition-transform transform m-2 self-center min-w-3/5 max-w-9/10">Edit</button>
+                                        <form action="{{ route('questionnaire.update', $questInstance->status=='Live',$questInstance->id) }}" method="POST" onsubmit="return confirm('Are you sure you want to make this questionnaire live?');" class="w-full flex justify-center">
+                                        @csrf
+                                        @method('PATCH')
+                                            <button class="cursor-pointer bg-brightgreen text-black font-semibold text-base uppercase rounded-lg p-2 hover:bg-darkgreen hover:text-white hover:font-bold active:scale-95 transition-transform transform m-2 self-center min-w-3/5 max-w-9/10 text-center">Make Live</button>
+                                        </form>
+                                        <a class="cursor-pointer bg-brightgreen text-black font-semibold text-base uppercase rounded-lg p-2 hover:bg-darkgreen hover:text-white hover:font-bold active:scale-95 transition-transform transform m-2 self-center min-w-3/5 max-w-9/10 text-center" href="{{ route('questionnaire.edit', $questInstance->id) }}">Edit</a>
                                     @endif
-                                    <button class="cursor-pointer bg-[#C1121F] text-white font-semibold text-base uppercase rounded-lg p-2 hover:bg-darkgreen hover:font-bold active:scale-95 transition-transform transform m-2 self-center min-w-3/5 max-w-9/10">Delete</button>
+                                    <form action="{{ route('questionnaire.destroy', $questInstance->id) }}" method="POST" onsubmit="return confirm('Are you sure you want to delete this questionnaire?');" class="w-full flex justify-center">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button class="cursor-pointer bg-[#C1121F] text-white font-semibold text-base uppercase rounded-lg p-2 hover:bg-darkgreen hover:font-bold active:scale-95 transition-transform transform m-2 self-center min-w-3/5 max-w-9/10 text-center">Delete</button>
+                                    </form>
                                 </td>
                             </tr>
             @empty
-                <p class="m-2">You have no questionnaires at this time. Please use the button above to make a questionnaire</p>
+                <p class="m-2">You have no questionnaires at this time.</p>
             @endforelse
                         </tbody>
                     </table>
@@ -70,13 +83,15 @@
                     <p class="text-base">{{$questInstance->description}}</p>
                     <p class="text-base font-bold py-4">Status: {{$questInstance->status}}</p>
                     <p class="text-base pb-6">Number of responses: </p>
+                    <section id="actions" class="flex flex-col justify-self-end-safe">
                     @if ($questInstance->status == 'Live')
-                        <button class="cursor-pointer bg-brightgreen text-black font-semibold text-base uppercase rounded-lg p-2 hover:bg-darkgreen hover:text-white hover:font-bold active:scale-95 transition-transform transform m-2 self-center min-w-2/5 max-w-9/10">Stop responses</button>
+                        <a class="cursor-pointer bg-brightgreen text-black font-semibold text-base uppercase rounded-lg p-2 hover:bg-darkgreen hover:text-white hover:font-bold active:scale-95 transition-transform transform m-2 self-center min-w-2/5 max-w-9/10 text-center">Stop responses</a>
                     @else
-                        <button class="cursor-pointer bg-brightgreen text-black font-semibold text-base uppercase rounded-lg p-2 hover:bg-darkgreen hover:text-white hover:font-bold active:scale-95 transition-transform transform m-2 self-center min-w-2/5 max-w-9/10">Make Live</button>
-                        <button class="cursor-pointer bg-brightgreen text-black font-semibold text-base uppercase rounded-lg p-2 hover:bg-darkgreen hover:text-white hover:font-bold active:scale-95 transition-transform transform m-2 self-center min-w-2/5 max-w-9/10">Edit</button>
+                        <a class="cursor-pointer bg-brightgreen text-black font-semibold text-base uppercase rounded-lg p-2 hover:bg-darkgreen hover:text-white hover:font-bold active:scale-95 transition-transform transform m-2 self-center min-w-2/5 max-w-9/10 text-center">Make Live</a>
+                        <a class="cursor-pointer bg-brightgreen text-black font-semibold text-base uppercase rounded-lg p-2 hover:bg-darkgreen hover:text-white hover:font-bold active:scale-95 transition-transform transform m-2 self-center min-w-2/5 max-w-9/10 text-center">Edit</a>
                     @endif
-                    <button class="cursor-pointer bg-[#C1121F] text-white font-semibold text-base uppercase rounded-lg p-2 hover:bg-darkgreen hover:font-bold active:scale-95 transition-transform transform m-2 self-center min-w-2/5 max-w-9/10">Delete</button>
+                    <a class="cursor-pointer bg-[#C1121F] text-white font-semibold text-base uppercase rounded-lg p-2 hover:bg-darkgreen hover:font-bold active:scale-95 transition-transform transform m-2 self-center min-w-2/5 max-w-9/10 text-center">Delete</a>
+                    </section>
                 </article>
             @endforeach
         </section>
