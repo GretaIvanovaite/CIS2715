@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 Use App\Models\Question;
+Use App\Models\QuestionOption;
 Use App\Models\Questionnaire;
 Use App\Http\Requests\QuestionnaireRequest;
 
@@ -43,6 +44,7 @@ class QuestionnaireController extends Controller
     public function show(Questionnaire $questionnaire)
     {
         $questions = Question::where('questionnaire_id', $questionnaire->id)->get();
+        $questionOptions = QuestionOption::where('question_id',  $questionnaire->id)->get();
         return view('questionnaires.show', compact('questionnaire', 'questions'));
     }
 

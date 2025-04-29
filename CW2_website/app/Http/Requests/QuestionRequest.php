@@ -21,7 +21,7 @@ class QuestionRequest extends FormRequest
      */
     public function rules(): array
     {
-        $acceptedTypes = ['Short text', 'Long text', 'Multi-choice', 'Scale'];
+        $acceptedTypes = ['Short-text', 'Long-text', 'Tick-one', 'Tick-many', 'Grid', 'Scale'];
         return [
             'text' => 'required|string|max:255',
             'type' => ['required', Rule::in($acceptedTypes)],

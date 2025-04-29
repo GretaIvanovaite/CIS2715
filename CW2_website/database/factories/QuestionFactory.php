@@ -16,7 +16,7 @@ class QuestionFactory extends Factory
      */
     public function definition(): array
     {
-        $acceptedTypes = ['Short text', 'Long text', 'Multi-choice', 'Scale'];
+        $acceptedTypes = ['Short-text', 'Long-text', 'Tick-one', 'Tick-many', 'Grid', 'Scale'];
         return [
             'text' => $this->faker->sentence(),
             'type' => $this->faker->randomElement($acceptedTypes),

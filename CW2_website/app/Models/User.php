@@ -47,6 +47,6 @@ class User extends Authenticatable
     }
 
     public function questionnaire(){
-        return $this->hasMany(Questionnaire::class);
+        return $this->hasMany(Questionnaire::class)->chaperone();
     }
 }

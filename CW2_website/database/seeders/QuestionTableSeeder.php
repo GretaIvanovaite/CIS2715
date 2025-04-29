@@ -13,17 +13,44 @@ class QuestionTableSeeder extends Seeder
      */
     public function run(): void
     {
-        Question::factory()->count(3)->create([
+        Question::factory()->create([
             'questionnaire_id' => 1,
-            'type' => 'Multi-choice',
+            'type' => 'Short-text',
         ]);
-        
-        Question::factory()->count(5)->create([
+
+        Question::factory()->create([
             'questionnaire_id' => 1,
+            'type' => 'Long-text',
+        ]);
+
+        Question::factory()->create([
+            'questionnaire_id' => 1,
+            'type' => 'Tick-one',
+        ]);
+
+        Question::factory()->create([
+            'questionnaire_id' => 1,
+            'type' => 'Tick-many',
+        ]);
+
+        Question::factory()->create([
+            'questionnaire_id' => 1,
+            'type' => 'Grid',
+        ]);
+
+        Question::factory()->create([
+            'questionnaire_id' => 1,
+            'type' => 'Scale',
         ]);
 
         Question::factory()->count(4)->create([
             'questionnaire_id' => 2,
         ]);
+
+        for ($questionnaire_id=3; $questionnaire_id < 12; $questionnaire_id++) { 
+            Question::factory()->count(4)->create([
+                'questionnaire_id' => $questionnaire_id,
+            ]);
+        }
     }
 }
