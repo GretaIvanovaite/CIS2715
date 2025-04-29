@@ -1,4 +1,4 @@
-<footer class="flex justify-between bg-mediumgreen px-15 py-10">
+<footer class="flex justify-between bg-mediumgreen px-15 py-10 text-xs md:text-sm">
     <section>
         <p>This website has been created as part of the CIS2715 module coursework!</p>
         <p>If you require any help please contact me: <a class="font-medium text-black hover:underline" href="mailto:25393081@edgehill.ac.uk">25393081@edgehill.ac.uk</a><p>

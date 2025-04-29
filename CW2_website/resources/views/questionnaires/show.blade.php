@@ -5,7 +5,7 @@
 
 
 @section('main-content')
-    <h2 class="text-xl pb-4 m-2 font-bold">{{$questionnaire->title}}</h2>
+    <h2 class="text-lg md:text-xl pb-4 m-2 font-bold">{{$questionnaire->title}}</h2>
     <section class="m-2">
         <p>{{$questionnaire->description}}</p>
     </section>
@@ -14,14 +14,66 @@
         $question_number = 1
     @endphp
     @forelse ($questions as $question)
-        <article class="bg-white border border-darkgreen rounded-md mx-2 my-5 px-5 py-10 md:max-w-3/5">
-            <h3>{{$question_number}}. {{$question->text}}</h3>
+        <article class="bg-white border border-darkgreen rounded-md mx-2 my-5 p-5 lg:max-w-4/5">
+            <h3 class="text-base md:text-lg mb-4">{{$question_number}}. {{$question->text}}</h3>
             @switch($question->type)
-                @case('Short text')
-                    <input type="text" name="textanswer" id="textanswer" class="pl-4 mb-2 bg-gray-50 text-gray-600 border focus:border-transparent border-gray-300 sm:text-sm rounded-lg ring-3 ring-transparent focus:ring-1 focus:outline-hidden focus:ring-gray-400 block w-full p-2.5 rounded-l-lg py-3 px-4" placeholder="Short text answer" autocomplete="off">
+                @case('Short-text')
+                    <input type="text" name="textanswer" id="textanswer" class="pl-4 mb-2 bg-gray-50 text-gray-600 border focus:border-transparent border-gray-300 text-xs md:text-sm rounded-lg ring-3 ring-transparent focus:ring-1 focus:outline-hidden focus:ring-gray-400 block w-full p-2.5 rounded-l-lg py-3 px-4" placeholder="Short text answer" autocomplete="off">
                     @break
-                @case('Long text')
-                    <textarea type="text" id="textanswer" name="textanswer" rows="5" required class="pl-4 mb-2 bg-gray-50 text-gray-600 border focus:border-transparent border-gray-300 sm:text-sm rounded-lg ring-3 ring-transparent focus:ring-1 focus:outline-hidden focus:ring-gray-400 block w-full p-2.5 rounded-l-lg py-3 px-4 resize-none" placeholder="Long text answer"></textarea>
+                @case('Long-text')
+                    <textarea type="text" id="textanswer" name="textanswer" rows="5" required class="pl-4 mb-2 bg-gray-50 text-gray-600 border focus:border-transparent border-gray-300 text-xs md:text-sm rounded-lg ring-3 ring-transparent focus:ring-1 focus:outline-hidden focus:ring-gray-400 block w-full p-2.5 rounded-l-lg py-3 px-4 resize-none" placeholder="Long text answer"></textarea>
+                    @break
+                @case('Tick-one')
+                    <ul>
+                        @foreach ($question->questionOption as $option)
+                        @php
+                            $optionNumber = $loop->index + 1;
+                        @endphp
+                        <li class="py-2 m-2 flex justify-start content-center flex-wrap">
+                            <input type="radio" id="option{{$optionNumber}}" name="question{{$question_number}}" value="{{$option->text}}" class="min-h-5 h-full w-auto aspect-square mr-1 md:mr-3">
+                            <label for="option{{$optionNumber}}" class="text-sm md:text-base align-middle">{{$option->text}}</label>
+                        </li>
+                        @endforeach
+                    </ul>
+                    @break
+                @case('Tick-many')
+                    <ul>
+                        @foreach ($question->questionOption as $option)
+                        @php
+                            $optionNumber = $loop->index + 1;
+                        @endphp
+                        <li class="py-2 m-2 flex justify-start content-center flex-wrap">
+                            <input type="checkbox" id="option{{$optionNumber}}" name="question{{$optionNumber}}" value="{{$option->text}}" class="min-h-5 h-full w-auto aspect-square mr-1 md:mr-3">
+                            <label for="option{{$optionNumber}}" class="inline-block text-sm md:text-base align-middle">{{$option->text}}</label>
+                        </li>
+                        @endforeach
+                    </ul>
+                    @break
+                @case('Grid')
+                    <section>
+                        @foreach ($question->questionOption as $option)
+                        @php
+                            $optionNumber = $loop->index + 1;
+                        @endphp
+                        <li class="py-2 m-2 flex justify-start content-center flex-wrap">
+                            <input type="checkbox" id="option{{$optionNumber}}" name="question{{$optionNumber}}" value="{{$option->text}}" class="min-h-5 h-full w-auto aspect-square mr-1 md:mr-3">
+                            <label for="option{{$optionNumber}}" class="inline-block text-sm md:text-base align-middle">{{$option->text}}</label>
+                        </li>
+                        @endforeach
+                    </section>
+                    @break
+                @case('Scale')
+                    <ul>
+                        @foreach ($question->questionOption as $option)
+                        @php
+                            $optionNumber = $loop->index + 1;
+                        @endphp
+                        <li class="py-2 m-2 flex justify-start content-center flex-wrap">
+                            <input type="checkbox" id="option{{$optionNumber}}" name="question{{$optionNumber}}" value="{{$option->text}}" class="min-h-5 h-full w-auto aspect-square mr-1 md:mr-3">
+                            <label for="option{{$optionNumber}}" class="inline-block text-sm md:text-base align-middle">{{$option->text}}</label>
+                        </li>
+                        @endforeach
+                    </ul>
                     @break
             @endswitch
             @php
@@ -29,7 +81,7 @@
             @endphp
         </article>
     @empty
-        <p class="m-2">This questionnaire has no questions.</p>
+        <p class="m-2 text-sm md:text-base">This questionnaire has no questions.</p>
     @endforelse
     </section>
 @endsection
