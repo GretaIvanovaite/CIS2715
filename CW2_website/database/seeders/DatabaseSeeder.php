@@ -24,6 +24,7 @@ class DatabaseSeeder extends Seeder
             UserTableSeeder::class,
             QuestionnaireTableSeeder::class,
             QuestionTableSeeder::class,
+            QuestionOptionTableSeeder::class,
         ]);
     }
 }

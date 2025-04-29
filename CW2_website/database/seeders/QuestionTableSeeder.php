@@ -13,6 +13,11 @@ class QuestionTableSeeder extends Seeder
      */
     public function run(): void
     {
+        Question::factory()->count(3)->create([
+            'questionnaire_id' => 1,
+            'type' => 'Multi-choice',
+        ]);
+        
         Question::factory()->count(5)->create([
             'questionnaire_id' => 1,
         ]);
