@@ -17,7 +17,7 @@ class QuestionnaireController extends Controller
     {
         //Adding this here if I need an admin view with ALL questionnaires
         $questionnaires = questionnaire::all();
-        return view('user.dashboard', ['questionnaires' => $questionnaires]);
+        return view('questionnaires', ['questionnaires' => $questionnaires]);
     }
 
     /**

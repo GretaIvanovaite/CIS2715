@@ -22,8 +22,8 @@
                         <thead class="bg-mediumgreen">
                             <tr>
                                 <th scope="col" class="px-2 py-4 w-2/10">Title</th>
-                                <th scope="col" class="px-2 py-4 w-4/10">Description</th>
-                                <th scope="col" class="px-2 py-4 w-1/10">Status</th>
+                                <th scope="col" class="px-2 py-4 w-3/10">Description</th>
+                                <th scope="col" class="px-2 py-4 w-2/10">Status</th>
                                 <th scope="col" class="px-2 py-4 w-1/10">Responses</th>
                                 <th scope="col" class="px-2 py-4 w-2/10">Actions</th>
                             </tr>
