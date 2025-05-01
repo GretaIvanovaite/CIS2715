@@ -50,28 +50,20 @@
                     </ul>
                     @break
                 @case('Grid')
-                    <section class="table">
-                        <div class="table-header-group">
-                            <div class="table-row">
-                                <p class="table-cell"></p>
-                            @foreach ($question->columnValue as $column)
-                                <p class="table-cell">{{$column->text}}</p>
-                            @endforeach
-                            </div>
-                        </div>
-                        <div class="table-row-group">
+                    <section class="grid grid-flow-row-dense auto-cols-max auto-rows-max justify-items-center-safe items-center">
+                        <p class="col-1 row-1">
+                        @foreach ($question->columnValue as $column)
+                            <p class="col-{{$loop->iteration + 1}} row-1">{{$column->text}}</p>
+                        @endforeach
                         @foreach ($question->questionOption as $row)
                             @php
                                 $rowNumber = $loop->iteration;
                             @endphp
-                            <div class="py-2 m-2 table-row">
-                                <label for="row{{$rowNumber}}" class="inline-block text-sm md:text-base align-middle table-cell">{{$row->text}}</label>
-                                @foreach ($question->columnValue as $column)
-                                    <input type="radio" id="row{{$rowNumber}}" name="question{{$question_number}}-row{{$rowNumber}}" value="{{$column->text}}" class="min-h-5 h-full w-auto aspect-square mr-1 md:mr-3 table-cell">
-                                @endforeach
-                            </div>
+                            <label for="row{{$rowNumber}}" class="align-middle text-sm md:text-base align-middle justify-self-start col-1 row-{{$rowNumber + 1}}">{{$row->text}}</label>
+                            @foreach ($question->columnValue as $column)
+                                <input type="radio" id="row{{$rowNumber}}" name="question{{$question_number}}-row{{$rowNumber}}" value="{{$column->text}}" class="py-2 min-h-5 max-h-2/3 w-auto aspect-square mr-1 md:mr-3 row-{{$rowNumber + 1}} col-{{$loop->iteration + 1}}">
+                            @endforeach
                         @endforeach
-                        </div>
                     </section>
                     @break
                 @case('Scale')
