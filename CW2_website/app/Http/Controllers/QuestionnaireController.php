@@ -62,7 +62,7 @@ class QuestionnaireController extends Controller
     public function update(QuestionnaireRequest $request, Questionnaire $questionnaire)
     {
         $questionnaire->update($request->validated());
-        return redirect()->route('questionnaires.show')->with('success', 'Questionnaire details updated successfully!');
+        return redirect()->route('questionnaires.show', ['id' => $questionnaire->id])->with('success', 'Questionnaire details updated successfully!');
     }
 
     /**
@@ -71,6 +71,6 @@ class QuestionnaireController extends Controller
     public function destroy(Questionnaire $questionnaire)
     {
         $questionnaire->delete();
-        return redirect()->route('user.dashboard')-with('success', 'Questionnaire deleted successfully!');
+        return redirect()->route('dashboard')->with('success', 'Questionnaire deleted successfully!');
     }
 }

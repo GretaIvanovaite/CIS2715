@@ -20,7 +20,7 @@ Route::get('/user/dashboard/', [DashboardController::class, 'index'])->name('das
 
 Route::controller(QuestionnaireController::class)->group(function () {
     Route::get('/questionnaires/create', 'create')->name('questionnaires.create');
-    Route::get('/questionnaires/edit', 'edit')->name('questionnaires.edit');
+    Route::get('/questionnaires/{questionnaire}/edit', 'edit')->name('questionnaires.edit');
     Route::post('/questionnaires/store', 'store')->name('questionnaires.store');
     Route::patch('/questionnaires/update', 'update')->name('questionnaires.update');
     Route::delete('/questionnaires/delete', 'destroy')->name('questionnaires.destroy');
