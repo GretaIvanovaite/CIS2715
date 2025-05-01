@@ -17,4 +17,8 @@ class Question extends Model
     public function questionOption(){
         return $this->hasMany(QuestionOption::class)->chaperone();
     }
+
+    public function columnValue(){
+        return $this->hasMany(ColumnValue::class)->chaperone();
+    }
 }

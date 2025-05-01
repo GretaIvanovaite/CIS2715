@@ -14,15 +14,15 @@ class QuestionOptionTableSeeder extends Seeder
     public function run(): void
     {
         QuestionOption::factory()->count(5)->create([
-            'question_id' => 1,
+            'question_id' => 3,
         ]);
 
         QuestionOption::factory()->count(5)->create([
-            'question_id' => 2,
+            'question_id' => 4,
         ]);
 
         QuestionOption::factory()->count(4)->create([
-            'question_id' => 3,
+            'question_id' => 5,
         ]);
     }
 }

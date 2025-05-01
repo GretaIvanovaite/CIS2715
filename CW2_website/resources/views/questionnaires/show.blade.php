@@ -27,7 +27,7 @@
                     <ul>
                         @foreach ($question->questionOption as $option)
                         @php
-                            $optionNumber = $loop->index + 1;
+                            $optionNumber = $loop->iteration;
                         @endphp
                         <li class="py-2 m-2 flex justify-start content-center flex-wrap">
                             <input type="radio" id="option{{$optionNumber}}" name="question{{$question_number}}" value="{{$option->text}}" class="min-h-5 h-full w-auto aspect-square mr-1 md:mr-3">
@@ -40,7 +40,7 @@
                     <ul>
                         @foreach ($question->questionOption as $option)
                         @php
-                            $optionNumber = $loop->index + 1;
+                            $optionNumber = $loop->iteration;
                         @endphp
                         <li class="py-2 m-2 flex justify-start content-center flex-wrap">
                             <input type="checkbox" id="option{{$optionNumber}}" name="question{{$optionNumber}}" value="{{$option->text}}" class="min-h-5 h-full w-auto aspect-square mr-1 md:mr-3">
@@ -50,23 +50,35 @@
                     </ul>
                     @break
                 @case('Grid')
-                    <section>
-                        @foreach ($question->questionOption as $option)
-                        @php
-                            $optionNumber = $loop->index + 1;
-                        @endphp
-                        <li class="py-2 m-2 flex justify-start content-center flex-wrap">
-                            <input type="checkbox" id="option{{$optionNumber}}" name="question{{$optionNumber}}" value="{{$option->text}}" class="min-h-5 h-full w-auto aspect-square mr-1 md:mr-3">
-                            <label for="option{{$optionNumber}}" class="inline-block text-sm md:text-base align-middle">{{$option->text}}</label>
-                        </li>
+                    <section class="table">
+                        <div class="table-header-group">
+                            <div class="table-row">
+                                <p class="table-cell"></p>
+                            @foreach ($question->columnValue as $column)
+                                <p class="table-cell">{{$column->text}}</p>
+                            @endforeach
+                            </div>
+                        </div>
+                        <div class="table-row-group">
+                        @foreach ($question->questionOption as $row)
+                            @php
+                                $rowNumber = $loop->iteration;
+                            @endphp
+                            <div class="py-2 m-2 table-row">
+                                <label for="row{{$rowNumber}}" class="inline-block text-sm md:text-base align-middle table-cell">{{$row->text}}</label>
+                                @foreach ($question->columnValue as $column)
+                                    <input type="radio" id="row{{$rowNumber}}" name="question{{$question_number}}-row{{$rowNumber}}" value="{{$column->text}}" class="min-h-5 h-full w-auto aspect-square mr-1 md:mr-3 table-cell">
+                                @endforeach
+                            </div>
                         @endforeach
+                        </div>
                     </section>
                     @break
                 @case('Scale')
                     <ul>
                         @foreach ($question->questionOption as $option)
                         @php
-                            $optionNumber = $loop->index + 1;
+                            $optionNumber = $loop->iteration;
                         @endphp
                         <li class="py-2 m-2 flex justify-start content-center flex-wrap">
                             <input type="checkbox" id="option{{$optionNumber}}" name="question{{$optionNumber}}" value="{{$option->text}}" class="min-h-5 h-full w-auto aspect-square mr-1 md:mr-3">
