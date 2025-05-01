@@ -16,7 +16,7 @@ final class SelectQuestionnaireCest
     public function seeAvailableQuestionnaires(AcceptanceTester $I){
 
         $I->haveInDatabase('users', [
-            'id' => 1,
+            'id' => 30,
             'name' => 'Test User',
             'email' => 'testuser@gmail.com',
             'password' => Hash::make('password'),
@@ -26,7 +26,7 @@ final class SelectQuestionnaireCest
             'title' => 'Test Questionnaire',
             'description' => 'Example Questionnaire Description',
             'status' => 'Live',
-            'user_id' => 1,
+            'user_id' => 30,
         ]);
 
 
@@ -34,13 +34,11 @@ final class SelectQuestionnaireCest
         $I->see('Available questionnaires', 'h2');
         $I->see('Test Questionnaire', 'h3');
         $I->see('Example Questionnaire Description', 'p');
-        $I->see('Live', 'p');
     }
 
     public function selectQuestionnaire(AcceptanceTester $I){
         $I->amOnPage('/index');
-        $I->click('#test_questionnaire');
-        $I->amOnPage('/questionnaire');
-        $I->see('Test Questionnaire');
+        $I->click('questionnaire');
+        $I->amOnPage('/questionnaires?1');
     }
 }

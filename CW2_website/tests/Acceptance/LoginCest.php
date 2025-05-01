@@ -18,6 +18,7 @@ final class LoginCest
             'name' => 'Test User',
             'email' => 'testuser@gmail.com',
             'password' => Hash::make('password'),
+            'id' => 30,
         ]);
     }
 
@@ -42,6 +43,6 @@ final class LoginCest
             'email' => 'testuser@gmail.com',
             'password' => Hash::make('passwor'),
         )), 'submitButton');
-        $I->see('Incorrect details provided');
+        $I->see('The password is incorrect.');
     }
 }

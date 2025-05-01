@@ -58,13 +58,12 @@ final class HomePageCest
     public function seeQuestionnairesSection(FunctionalTester $I)
     {
         User::factory()->create([
-            'id' => 1,
+            'id' => 30,
         ]);
         Questionnaire::factory()->create([
             'title' => 'Test Questionnaire',
             'description' => 'Example Questionnaire Description',
-            'status' => 'Live',
-            'user_id' => 1,
+            'id' => 30,
         ]);
 
         $I->amOnPage('/index');

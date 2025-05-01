@@ -13,7 +13,7 @@ modules:
             environment_file: .env.testing
             cleanup: false
         - Db:
-            dsn: 'mysql:host=172.18.0.2;dbname=cw2_testing'
+            dsn: 'mysql:host=172.18.0.2;dbname=cw2'
             user: 'root'
             password: 'password'
             cleanup: false

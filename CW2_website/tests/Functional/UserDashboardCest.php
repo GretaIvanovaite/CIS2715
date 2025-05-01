@@ -53,13 +53,13 @@ final class UserDashboardCest
     public function seeQuestionnairesSection(FunctionalTester $I)
     {
         User::factory()->create([
-            'id' => 1,
+            'id' => 30,
         ]);
         Questionnaire::factory()->create([
             'title' => 'Test Questionnaire',
             'description' => 'Example Questionnaire Description',
             'status' => 'In development',
-            'user_id' => 1,
+            'id' => 30,
         ]);
 
         $I->amOnPage('/user/dashboard');

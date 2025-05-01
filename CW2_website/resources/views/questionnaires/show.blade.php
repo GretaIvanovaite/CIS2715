@@ -6,11 +6,13 @@
 
 @section('main-content')
     <h2 class="text-lg md:text-xl pb-4 m-2 font-bold">{{$questionnaire->title}}</h2>
-    <section class="flex flex-col m-2 items-start">
-        <p class="m-2">{{$questionnaire->description}}</p>
-        <a class="cursor-pointer bg-brightgreen text-black font-semibold text-sm md:text-base uppercase rounded-lg p-2 hover:bg-darkgreen hover:text-white hover:font-bold active:scale-95 transition-transform transform m-2 mt-6 min-w-auto max-w-sm text-center justify-self-end-safe" href="{{ route('questionnaires.edit', $questionnaire->id) }}">Edit questionnaire details</a>
-        <a class="cursor-pointer bg-brightgreen text-black font-semibold text-sm md:text-base uppercase rounded-lg p-2 hover:bg-darkgreen hover:text-white hover:font-bold active:scale-95 transition-transform transform m-2 mt-6 min-w-auto max-w-sm text-center justify-self-end-safe" href="{{ route('questions.create') }}">New question</a>
-    </section>
+    <p class="m-2">{{$questionnaire->description}}</p>
+    @if ($questionnaire->status != 'Live') {{--&& $questionnaire->user_id == $auth()->user()->id)--}}
+        <section class="flex flex-col m-2 items-start">
+            <a class="cursor-pointer bg-brightgreen text-black font-semibold text-sm md:text-base uppercase rounded-lg p-2 hover:bg-darkgreen hover:text-white hover:font-bold active:scale-95 transition-transform transform m-2 mt-6 min-w-auto max-w-sm text-center justify-self-end-safe" href="{{ route('questionnaires.edit', $questionnaire->id) }}">Edit questionnaire details</a>
+            <a class="cursor-pointer bg-brightgreen text-black font-semibold text-sm md:text-base uppercase rounded-lg p-2 hover:bg-darkgreen hover:text-white hover:font-bold active:scale-95 transition-transform transform m-2 mt-6 min-w-auto max-w-sm text-center justify-self-end-safe" href="{{ route('questions.create') }}">New question</a>
+        </section>
+    @endif
     <section id="questions" class="flex flex-col justify-between">
     @php
         $question_number = 1
@@ -79,10 +81,12 @@
                 $question_number += 1
             @endphp
         </article>
-        <article id="actions" class="flex">
-            <a class="cursor-pointer bg-brightgreen text-black font-semibold text-sm md:text-base uppercase rounded-lg p-2 hover:bg-darkgreen hover:text-white hover:font-bold active:scale-95 transition-transform transform m-2 mb-6 self-center min-w-auto max-w-9/10 text-center justify-self-end-safe self-center" href="{{ route('questions.edit', $question->id) }}">Edit question</a>
-            <a class="cursor-pointer bg-[#C1121F] text-black font-semibold text-sm md:text-base uppercase rounded-lg p-2 hover:bg-darkgreen hover:text-white hover:font-bold active:scale-95 transition-transform transform m-2 mb-6 self-center min-w-auto max-w-9/10 text-center justify-self-end-safe self-center" href="{{ route('questions.destroy', $question->id) }}">Delete question</a>
-        </article>
+        @if ($questionnaire->status != 'Live') {{--&& $questionnaire->user_id == $auth()->user()->id)--}}
+            <article id="actions" class="flex">
+                <a class="cursor-pointer bg-brightgreen text-black font-semibold text-sm md:text-base uppercase rounded-lg p-2 hover:bg-darkgreen hover:text-white hover:font-bold active:scale-95 transition-transform transform m-2 mb-6 self-center min-w-auto max-w-9/10 text-center justify-self-end-safe self-center" href="{{ route('questions.edit', $question->id) }}">Edit question</a>
+                <a class="cursor-pointer bg-[#C1121F] text-white font-semibold text-sm md:text-base uppercase rounded-lg p-2 hover:bg-darkgreen hover:text-white hover:font-bold active:scale-95 transition-transform transform m-2 mb-6 self-center min-w-auto max-w-9/10 text-center justify-self-end-safe self-center" href="{{ route('questions.destroy', $question->id) }}">Delete question</a>
+            </article>
+        @endif
     @empty
         <p class="m-2 text-sm md:text-base">This questionnaire has no questions.</p>
     @endforelse
