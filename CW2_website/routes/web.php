@@ -17,13 +17,14 @@ Route::get('/signup', [UserController::class, 'create'])->name('signup');
 
 Route::get('/user/dashboard/', [DashboardController::class, 'index'])->name('dashboard');
 
-Route::get('/questionnaires/{questionnaire}', [QuestionnaireController::class, 'show'])->name('questionnaires.show');
+// Route::get('/questionnaires/{questionnaire}', [QuestionnaireController::class, 'show'])->name('questionnaires.show');
 
+Route::get('/questionnaires/show', [QuestionnaireController::class,'show'])->name('questionnaires.show');
 
 Route::controller(QuestionnaireController::class)->group(function () {
-    Route::get('/questionnaires/create', 'create')->name('questionnaire.create');
-    Route::get('/questionnaires/edit', 'edit')->name('questionnaire.edit');
-    Route::post('/questionnaires/submit', 'store')->name('questionnaires.submit');
-    Route::patch('/questionnaires/update', 'update')->name('questionnaire.update');
-    Route::delete('/questionnaires/destroy', 'destroy')->name('questionnaire.destroy');
+    Route::get('/questionnaires/create', 'create')->name('questionnaires.create');
+    Route::get('/questionnaires/edit', 'edit')->name('questionnaires.edit');
+    Route::post('/questionnaires/store', 'store')->name('questionnaires.store');
+    Route::patch('/questionnaires/update', 'update')->name('questionnaires.update');
+    Route::delete('/questionnaires/destroy', 'destroy')->name('questionnaires.destroy');
 });

@@ -11,7 +11,7 @@ class QuestionnaireRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -23,9 +23,10 @@ class QuestionnaireRequest extends FormRequest
     {
         $acceptedStatus = ['In development', 'Live', 'Closed'];
         return [
-            'title' => 'required|string|max:255',
-            'detail' => 'nullable|string',
-            'status' => ['required', Rule::in($acceptedStatus)],
+            'title' => 'unique:questionnaires|required|string|max:255',
+            'description' => 'nullable|string',
+            'status' => 'required|string',
+            'user_id' => 'required|integer',
         ];
     }
 }

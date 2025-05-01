@@ -17,7 +17,7 @@ class QuestionnaireController extends Controller
     {
         //Adding this here if I need an admin view with ALL questionnaires
         $questionnaires = questionnaire::all();
-        return view('questionnaires', ['questionnaires' => $questionnaires]);
+        return view('user.dashboard', ['questionnaires' => $questionnaires]);
     }
 
     /**
@@ -35,7 +35,7 @@ class QuestionnaireController extends Controller
     {
         Questionnaire::create($request->validated());
 
-        return redirect()->route('questionnaires.show')->with('success', 'Questionnaire created successfully!');
+        return redirect()->route('dashboard')->with('success', 'Questionnaire created successfully!');
     }
 
     /**

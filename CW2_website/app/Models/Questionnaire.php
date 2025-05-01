@@ -13,6 +13,7 @@ class Questionnaire extends Model
         'title',
         'description',
         'status',
+        'user_id',
     ];
 
     public function question(){
