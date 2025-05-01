@@ -40,7 +40,7 @@ class QuestionTableSeeder extends Seeder
 
         Question::factory()->create([
             'questionnaire_id' => 1,
-            'type' => 'Scale',
+            'type' => 'Range',
         ]);
 
         Question::factory()->count(4)->create([

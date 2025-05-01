@@ -21,4 +21,8 @@ class Question extends Model
     public function columnValue(){
         return $this->hasMany(ColumnValue::class)->chaperone();
     }
+
+    public function sliderValue(){
+        return $this->hasMany(SliderValue::class)->chaperone();
+    }
 }

@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class QuestionRequest extends FormRequest
+class SliderValueRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -21,10 +21,10 @@ class QuestionRequest extends FormRequest
      */
     public function rules(): array
     {
-        $acceptedTypes = ['Short-text', 'Long-text', 'Tick-one', 'Tick-many', 'Grid', 'Range'];
         return [
-            'text' => 'required|string|max:255',
-            'type' => ['required', Rule::in($acceptedTypes)],
+            'min' => 'required|integer',
+            'max' => 'required|integer',
+            'step' => 'nullable|integer',
         ];
     }
 }

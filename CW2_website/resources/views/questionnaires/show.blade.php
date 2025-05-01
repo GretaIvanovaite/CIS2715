@@ -30,8 +30,8 @@
                             $optionNumber = $loop->iteration;
                         @endphp
                         <li class="py-2 m-2 flex justify-start content-center flex-wrap">
-                            <input type="radio" id="option{{$optionNumber}}" name="question{{$question_number}}" value="{{$option->text}}" class="min-h-5 h-full w-auto aspect-square mr-1 md:mr-3">
-                            <label for="option{{$optionNumber}}" class="text-sm md:text-base align-middle">{{$option->text}}</label>
+                            <input type="radio" id="option{{$optionNumber}}" name="question{{$question_number}}" value="{{$option->text}}" class="min-h-4 h-full w-auto aspect-square mr-1 md:mr-3">
+                            <label for="option{{$optionNumber}}" class="text-sm md:text-base align-middle self-center">{{$option->text}}</label>
                         </li>
                         @endforeach
                     </ul>
@@ -43,8 +43,8 @@
                             $optionNumber = $loop->iteration;
                         @endphp
                         <li class="py-2 m-2 flex justify-start content-center flex-wrap">
-                            <input type="checkbox" id="option{{$optionNumber}}" name="question{{$optionNumber}}" value="{{$option->text}}" class="min-h-5 h-full w-auto aspect-square mr-1 md:mr-3">
-                            <label for="option{{$optionNumber}}" class="inline-block text-sm md:text-base align-middle">{{$option->text}}</label>
+                            <input type="checkbox" id="option{{$optionNumber}}" name="question{{$optionNumber}}" value="{{$option->text}}" class="min-h-4 h-full w-auto aspect-square mr-1 md:mr-3">
+                            <label for="option{{$optionNumber}}" class="inline-block text-sm md:text-base align-middle self-center">{{$option->text}}</label>
                         </li>
                         @endforeach
                     </ul>
@@ -53,31 +53,24 @@
                     <section class="grid grid-flow-row-dense auto-cols-max auto-rows-max justify-items-center-safe items-center">
                         <p class="col-1 row-1">
                         @foreach ($question->columnValue as $column)
-                            <p class="col-{{$loop->iteration + 1}} row-1">{{$column->text}}</p>
+                            <p class="col-{{$loop->iteration + 1}} row-1 px-2 justify-self-center-safe self-center-safe">{{$column->text}}</p>
                         @endforeach
                         @foreach ($question->questionOption as $row)
                             @php
                                 $rowNumber = $loop->iteration;
                             @endphp
-                            <label for="row{{$rowNumber}}" class="align-middle text-sm md:text-base align-middle justify-self-start col-1 row-{{$rowNumber + 1}}">{{$row->text}}</label>
+                            <label for="row{{$rowNumber}}" class="text-sm md:text-base self-center justify-self-start col-1 row-{{$rowNumber + 1}} pr-5 my-1 md:my-3">{{$row->text}}</label>
                             @foreach ($question->columnValue as $column)
-                                <input type="radio" id="row{{$rowNumber}}" name="question{{$question_number}}-row{{$rowNumber}}" value="{{$column->text}}" class="py-2 min-h-5 max-h-2/3 w-auto aspect-square mr-1 md:mr-3 row-{{$rowNumber + 1}} col-{{$loop->iteration + 1}}">
+                                <input type="radio" id="row{{$rowNumber}}" name="question{{$question_number}}-row{{$rowNumber}}" value="{{$column->text}}" class="min-h-4 h-2/5 w-auto aspect-square mx-1 md:mx-3 row-{{$rowNumber + 1}} col-{{$loop->iteration + 1}} justify-self-center-safe self-center-safe">
                             @endforeach
                         @endforeach
                     </section>
                     @break
-                @case('Scale')
-                    <ul>
-                        @foreach ($question->questionOption as $option)
-                        @php
-                            $optionNumber = $loop->iteration;
-                        @endphp
-                        <li class="py-2 m-2 flex justify-start content-center flex-wrap">
-                            <input type="checkbox" id="option{{$optionNumber}}" name="question{{$optionNumber}}" value="{{$option->text}}" class="min-h-5 h-full w-auto aspect-square mr-1 md:mr-3">
-                            <label for="option{{$optionNumber}}" class="inline-block text-sm md:text-base align-middle">{{$option->text}}</label>
-                        </li>
-                        @endforeach
-                    </ul>
+                @case('Range')
+                    <section class="flex">
+                        <input type="range" name="rangeanswer" id="rangeanswer" class="border focus:border-transparent border-gray-300 text-xs md:text-sm rounded-lg ring-3 ring-transparent focus:ring-1 focus:outline-hidden block w-full mr-2 md:mr-4 my-2 md:my-5 rounded-l-lg basis-9/10" oninput="this.nextElementSibling.value = this.value">
+                        <output for="rangeanswer" class="border border-darkgreen border-md border-1 basis-1/10 p-2 min-w-12 mx-2 text-center align-middle justify-self-center-safe self-center-safe min-h-12"></output>
+                    </section>
                     @break
             @endswitch
             @php
