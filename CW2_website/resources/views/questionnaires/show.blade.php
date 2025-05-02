@@ -8,9 +8,9 @@
     <h2 class="text-lg md:text-xl pb-4 m-2 font-bold">{{$questionnaire->title}}</h2>
     <p class="m-2">{{$questionnaire->description}}</p>
     @if ($questionnaire->status != 'Live') {{--&& $questionnaire->user_id == $auth()->user()->id)--}}
-        <section class="flex flex-col m-2 items-start">
+        <section class="flex flex-col items-start">
             <a class="cursor-pointer bg-brightgreen text-black font-semibold text-sm md:text-base uppercase rounded-lg p-2 hover:bg-darkgreen hover:text-white hover:font-bold active:scale-95 transition-transform transform m-2 mt-6 min-w-auto max-w-sm text-center justify-self-end-safe" href="{{ route('questionnaires.edit', $questionnaire->id) }}">Edit questionnaire details</a>
-            <a class="cursor-pointer bg-brightgreen text-black font-semibold text-sm md:text-base uppercase rounded-lg p-2 hover:bg-darkgreen hover:text-white hover:font-bold active:scale-95 transition-transform transform m-2 mt-6 min-w-auto max-w-sm text-center justify-self-end-safe" href="{{ route('questions.create') }}">New question</a>
+            <a class="cursor-pointer bg-brightgreen text-black font-semibold text-sm md:text-base uppercase rounded-lg p-2 hover:bg-darkgreen hover:text-white hover:font-bold active:scale-95 transition-transform transform m-2 mt-6 min-w-auto max-w-sm text-center justify-self-end-safe" href="{{ route('questions.create', $questionnaire->id) }}">New question</a>
         </section>
     @endif
     <section id="questions" class="flex flex-col justify-between">
@@ -25,7 +25,7 @@
                     <input type="text" name="question{{$question_number}}" id="question{{$question_number}}" class="pl-4 mb-2 bg-gray-50 text-gray-600 border focus:border-transparent border-gray-300 text-xs md:text-sm rounded-lg ring-3 ring-transparent focus:ring-1 focus:outline-hidden focus:ring-gray-400 block w-full p-2.5 rounded-l-lg py-3 px-4" placeholder="Short text answer" autocomplete="off">
                     @break
                 @case('Long-text')
-                    <textarea type="text" id="question{{$question_number}}" name="question{{$question_number}}" rows="5" class="pl-4 mb-2 bg-gray-50 text-gray-600 border focus:border-transparent border-gray-300 text-xs md:text-sm rounded-lg ring-3 ring-transparent focus:ring-1 focus:outline-hidden focus:ring-gray-400 block w-full p-2.5 rounded-l-lg py-3 px-4 resize-none" placeholder="Long text answer"></textarea>
+                    <textarea type="text" id="question{{$question_number}}" name="question{{$question_number}}" rows="5" class="pl-4 mb-2 bg-gray-50 text-gray-600 border focus:border-transparent border-gray-300 text-xs md:text-sm rounded-lg ring-3 ring-transparent focus:ring-1 focus:outline-hidden focus:ring-gray-400 block w-full p-2.5 rounded-l-lg py-3 px-4 resize-y" placeholder="Long text answer"></textarea>
                     @break
                 @case('Tick-one')
                     <ul>
@@ -82,9 +82,11 @@
             @endphp
         </article>
         @if ($questionnaire->status != 'Live') {{--&& $questionnaire->user_id == $auth()->user()->id)--}}
-            <article id="actions" class="flex">
-                <a class="cursor-pointer bg-brightgreen text-black font-semibold text-sm md:text-base uppercase rounded-lg p-2 hover:bg-darkgreen hover:text-white hover:font-bold active:scale-95 transition-transform transform m-2 mb-6 self-center min-w-auto max-w-9/10 text-center justify-self-end-safe self-center" href="{{ route('questions.edit', $question->id) }}">Edit question</a>
-                <a class="cursor-pointer bg-[#C1121F] text-white font-semibold text-sm md:text-base uppercase rounded-lg p-2 hover:bg-darkgreen hover:text-white hover:font-bold active:scale-95 transition-transform transform m-2 mb-6 self-center min-w-auto max-w-9/10 text-center justify-self-end-safe self-center" href="{{ route('questions.destroy', $question->id) }}">Delete question</a>
+            <article id="actions" class="flex justify-between mb-6 px-2 lg:max-w-4/5">
+                <div class="max-w-8/10 h-auto flex">
+                    <a class="cursor-pointer bg-brightgreen text-black font-semibold text-sm md:text-base uppercase rounded-lg p-2 hover:bg-darkgreen hover:text-white hover:font-bold active:scale-95 transition-transform transform self-center min-w-auto text-center justify-self-end-safe self-center mt-3 mb-6" href="{{ route('questions.edit', $question->id) }}">Edit question</a>
+                </div>
+                <a class="cursor-pointer bg-[#C1121F] text-white font-semibold text-sm md:text-base uppercase rounded-lg p-2 hover:bg-darkgreen hover:text-white hover:font-bold active:scale-95 transition-transform transform mt-3 mb-6 self-center min-w-auto max-w-9/10 text-center justify-self-end-safe self-center" href="{{ route('questions.destroy', $question->id) }}">Delete question</a>
             </article>
         @endif
     @empty

@@ -23,6 +23,12 @@ class QuestionnaireRequest extends FormRequest
     public function rules(): array
     {
         $acceptedStatus = ['In development', 'Live', 'Closed'];
+        if ($this->isMethod('patch')) {
+            return [
+                'title' => 'unique:questionnaires|required|string|max:255',
+                'description' => 'nullable|string',
+            ];
+        }
         return [
             'title' => 'unique:questionnaires|required|string|max:255',
             'description' => 'nullable|string',

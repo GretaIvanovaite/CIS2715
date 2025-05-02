@@ -28,7 +28,7 @@
                 @endif
                             <tr class="border-darkgreen">
                                 <th scope="row" class="font-semibold text-left p-2 text-pretty">{{$questInstance->title}}</th>
-                                <td class="text-sm md:text-base text-left p-2 text-pretty">{{$questInstance->description}}</td>
+                                <td class="text-sm md:text-base text-left p-2 text-pretty wrap-break-word">{{$questInstance->description}}</td>
                                 <td class="text-sm md:text-base text-center p-2 text-pretty font-semibold">{{$questInstance->status}}</td>
                                 <td class="text-sm md:text-base text-center p-2 text-pretty"> Responses </td>
                                 <td class="text-sm md:text-base p-2 justify-items-center flex flex-col">

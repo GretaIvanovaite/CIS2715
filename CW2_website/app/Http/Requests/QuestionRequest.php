@@ -12,7 +12,7 @@ class QuestionRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -23,9 +23,16 @@ class QuestionRequest extends FormRequest
     public function rules(): array
     {
         $acceptedTypes = ['Short-text', 'Long-text', 'Tick-one', 'Tick-many', 'Grid', 'Range'];
+        if ($this->isMethod('patch')) {
+            return [
+                'text' => 'required|string|max:255',
+                'type' => ['required', Rule::in($acceptedTypes)],
+            ];
+        }
         return [
             'text' => 'required|string|max:255',
             'type' => ['required', Rule::in($acceptedTypes)],
+            'questionnaire_id' => 'required|integer',
         ];
     }
 }

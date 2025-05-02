@@ -62,7 +62,7 @@ class QuestionnaireController extends Controller
     public function update(QuestionnaireRequest $request, Questionnaire $questionnaire)
     {
         $questionnaire->update($request->validated());
-        return redirect()->route('questionnaires.show', ['id' => $questionnaire->id])->with('success', 'Questionnaire details updated successfully!');
+        return redirect()->route('questionnaires.show', $questionnaire->id)->with('success', 'Questionnaire details updated successfully!');
     }
 
     /**

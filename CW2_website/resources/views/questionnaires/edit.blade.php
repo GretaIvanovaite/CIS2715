@@ -19,7 +19,7 @@
             @error('description')
                 <span class="text-red-500 text-xs md:text-sm">{{ $message }}</span>
             @enderror
-            <textarea rows=5 name="description" id="description" class="resize pl-4 mb-2 bg-gray-50 text-gray-600 border focus:border-transparent border-gray-300 text-sm md:text-base rounded-lg ring-3 ring-transparent focus:ring-1 focus:outline-hidden focus:ring-gray-400 block w-full p-2.5 rounded-l-lg py-3 px-4" value="{{ old('description', $questionnaire) }}" required>{{ old('description') !== null ? old('description') : $questionnaire->description }}</textarea>
+            <textarea rows=5 name="description" id="description" class="resize-y pl-4 mb-2 bg-gray-50 text-gray-600 border focus:border-transparent border-gray-300 text-sm md:text-base rounded-lg ring-3 ring-transparent focus:ring-1 focus:outline-hidden focus:ring-gray-400 block w-full p-2.5 rounded-l-lg py-3 px-4" value="{{ old('description', $questionnaire) }}" required>{{ old('description') !== null ? old('description') : $questionnaire->description }}</textarea>
             <button type="submit" class="cursor-pointer bg-brightgreen text-black font-semibold text-sm md:text-base uppercase rounded-lg p-2 hover:bg-darkgreen hover:text-white hover:font-bold active:scale-95 transition-transform transform m-2 self-center min-w-1/5 max-w-9/10">Update</button>
         </form>
     </section>

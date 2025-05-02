@@ -20,17 +20,17 @@ Route::get('/user/dashboard/', [DashboardController::class, 'index'])->name('das
 
 Route::controller(QuestionnaireController::class)->group(function () {
     Route::get('/questionnaires/create', 'create')->name('questionnaires.create');
-    Route::get('/questionnaires/{questionnaire}/edit', 'edit')->name('questionnaires.edit');
+    Route::get('/questionnaires/edit/{questionnaire}', 'edit')->name('questionnaires.edit');
     Route::post('/questionnaires/store', 'store')->name('questionnaires.store');
-    Route::patch('/questionnaires/update', 'update')->name('questionnaires.update');
-    Route::delete('/questionnaires/delete', 'destroy')->name('questionnaires.destroy');
+    Route::patch('/questionnaires/update/{questionnaire}', 'update')->name('questionnaires.update');
+    Route::delete('/questionnaires/delete/{questionnaire}', 'destroy')->name('questionnaires.destroy');
 });
 
 Route::controller(QuestionController::class)->group(function () {
-    Route::get('/questions/create', 'create')->name('questions.create');
-    Route::get('/questions/edit', 'edit')->name('questions.edit');
+    Route::get('/questions/create/{questionnaire}', 'create')->name('questions.create');
+    Route::get('/questions/edit/{question}', 'edit')->name('questions.edit');
     Route::post('/questions/store', 'store')->name('questions.store');
-    Route::patch('/questions/update', 'update')->name('questions.update');
+    Route::patch('/questions/update/{question}', 'update')->name('questions.update');
     Route::delete('/questions/delete', 'destroy')->name('questions.destroy');
 });
 
