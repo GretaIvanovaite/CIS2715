@@ -66,10 +66,20 @@ class QuestionnaireController extends Controller
     }
 
     /**
+     * Update the squestionnaire status from the user dashboard.
+     */
+    public function close(QuestionnaireRequest $request, Questionnaire $questionnaire)
+    {
+        $questionnaire->update($request->validated());
+        return redirect()->route('dashboard')->with('success', 'Questionnaire details updated successfully!');
+    }
+
+    /**
      * Remove the specified resource from storage.
      */
     public function destroy(Questionnaire $questionnaire)
     {
+        $questionnaire->question->each->delete();
         $questionnaire->delete();
         return redirect()->route('dashboard')->with('success', 'Questionnaire deleted successfully!');
     }

@@ -49,7 +49,8 @@ class QuestionController extends Controller
      */
     public function destroy(Question $question)
     {
+        $questionnaire = $question->questionnaire_id;
         $question->delete();
-        return redirect()->route('questionnaires.show', $request->questionnaire_id)->with('success', 'Question deleted successfully!');
+        return redirect()->route('questionnaires.show', $questionnaire)->with('success', 'Question deleted successfully!');
     }
 }

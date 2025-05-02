@@ -83,10 +83,14 @@
         </article>
         @if ($questionnaire->status != 'Live') {{--&& $questionnaire->user_id == $auth()->user()->id)--}}
             <article id="actions" class="flex justify-between mb-6 px-2 lg:max-w-4/5">
-                <div class="max-w-8/10 h-auto flex">
+                <div class="max-w-7/10 h-auto flex">
                     <a class="cursor-pointer bg-brightgreen text-black font-semibold text-sm md:text-base uppercase rounded-lg p-2 hover:bg-darkgreen hover:text-white hover:font-bold active:scale-95 transition-transform transform self-center min-w-auto text-center justify-self-end-safe self-center mt-3 mb-6" href="{{ route('questions.edit', $question->id) }}">Edit question</a>
                 </div>
-                <a class="cursor-pointer bg-[#C1121F] text-white font-semibold text-sm md:text-base uppercase rounded-lg p-2 hover:bg-darkgreen hover:text-white hover:font-bold active:scale-95 transition-transform transform mt-3 mb-6 self-center min-w-auto max-w-9/10 text-center justify-self-end-safe self-center" href="{{ route('questions.destroy', $question->id) }}">Delete question</a>
+                <form action="{{ route('questions.destroy', $question->id) }}" method="POST" onsubmit="return confirm('Are you sure you want to delete this question?');" class="max-w-3/10 h-auto flex">
+                    @csrf
+                    @method('DELETE')
+                    <button class="cursor-pointer bg-[#C1121F] text-white font-semibold text-sm md:text-base uppercase rounded-lg p-2 hover:bg-darkgreen hover:text-white hover:font-bold active:scale-95 transition-transform transform mt-3 mb-6 self-center min-w-3/5 max-w-9/10 text-center justify-self-end-safe self-center min-w-25">Delete</button>
+                </form>
             </article>
         @endif
     @empty

@@ -16,7 +16,7 @@ return new class extends Migration
             $table->string('type');
             $table->longtext('text');
             $table->unsignedInteger('questionnaire_id');
-                $table->foreign('questionnaire_id')->references('id')->on('questionnaires');
+                $table->foreign('questionnaire_id')->references('id')->on('questionnaires')->onDelete('cascade');
             $table->timestamps();
         });
     }

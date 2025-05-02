@@ -17,7 +17,7 @@ return new class extends Migration
             $table->integer('max');
             $table->integer('step');
             $table->unsignedInteger('question_id');
-            $table->foreign('question_id')->references('id')->on('questions');
+            $table->foreign('question_id')->references('id')->on('questions')->onDelete('cascade');
             $table->timestamps();
         });
     }

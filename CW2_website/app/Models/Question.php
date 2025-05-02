@@ -15,6 +15,10 @@ class Question extends Model
         'questionnaire_id',
     ];
 
+    public function questionnaire(){
+        return $this->belongsTo(Questionnaire::class);
+    }
+
     public function questionOption(){
         return $this->hasMany(QuestionOption::class)->chaperone();
     }

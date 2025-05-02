@@ -23,6 +23,7 @@ Route::controller(QuestionnaireController::class)->group(function () {
     Route::get('/questionnaires/edit/{questionnaire}', 'edit')->name('questionnaires.edit');
     Route::post('/questionnaires/store', 'store')->name('questionnaires.store');
     Route::patch('/questionnaires/update/{questionnaire}', 'update')->name('questionnaires.update');
+    Route::patch('/questionnaires/close/{questionnaire}', 'close')->name('questionnaires.close');
     Route::delete('/questionnaires/delete/{questionnaire}', 'destroy')->name('questionnaires.destroy');
 });
 
@@ -31,7 +32,7 @@ Route::controller(QuestionController::class)->group(function () {
     Route::get('/questions/edit/{question}', 'edit')->name('questions.edit');
     Route::post('/questions/store', 'store')->name('questions.store');
     Route::patch('/questions/update/{question}', 'update')->name('questions.update');
-    Route::delete('/questions/delete', 'destroy')->name('questions.destroy');
+    Route::delete('/questions/delete/{question}', 'destroy')->name('questions.destroy');
 });
 
 Route::get('/questionnaires/{questionnaire}', [QuestionnaireController::class, 'show'])->name('questionnaires.show');
