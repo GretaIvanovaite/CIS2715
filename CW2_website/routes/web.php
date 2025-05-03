@@ -6,6 +6,9 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\QuestionnaireController;
 use App\Http\Controllers\QuestionController;
+use App\Http\Controllers\OptionController;
+use App\Http\Controllers\ColumnValueController;
+use App\Http\Controllers\RangeSliderController;
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::get('/index', [HomeController::class, 'index'])->name('home');
@@ -28,7 +31,7 @@ Route::controller(QuestionnaireController::class)->group(function () {
 Route::get('/questionnaires/{questionnaire}', [QuestionnaireController::class, 'show'])->name('questionnaires.show');
 
 Route::controller(QuestionController::class)->group(function () {
-    Route::get('/questions/create/{questionnaire}', 'create')->name('questions.create');
+    Route::get('{questionnaire}/questions/create/', 'create')->name('questions.create');
     Route::get('/questions/edit/{question}', 'edit')->name('questions.edit');
     Route::post('/questions/store', 'store')->name('questions.store');
     Route::patch('/questions/update/{question}', 'update')->name('questions.update');
@@ -36,11 +39,11 @@ Route::controller(QuestionController::class)->group(function () {
 });
 
 Route::controller(OptionController::class)->group(function () {
-    Route::get('/options/create/{question}', 'create')->name('options.create');
-    Route::get('/options/edit/{question}', 'edit')->name('options.edit');
-    Route::post('/options/store', 'store')->name('options.store');
-    Route::patch('/options/update/{questionOption}', 'update')->name('options.update');
-    Route::delete('/options/delete/{questionOption}', 'destroy')->name('options.destroy');
+    Route::get('/questionOptions/create/{question}', 'create')->name('options.create');
+    Route::get('/questionOptions/edit/{question}', 'edit')->name('options.edit');
+    Route::post('/questionOptions/store', 'store')->name('options.store');
+    Route::patch('/questionOptions/update/{questionOption}', 'update')->name('options.update');
+    Route::delete('/questionOptions/delete/{questionOption}', 'destroy')->name('options.destroy');
 });
 
 Route::controller(ColumnValueController::class)->group(function () {

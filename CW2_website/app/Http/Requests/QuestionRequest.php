@@ -23,10 +23,9 @@ class QuestionRequest extends FormRequest
     public function rules(): array
     {
         $acceptedTypes = ['Short-text', 'Long-text', 'Tick-one', 'Tick-many', 'Grid', 'Range'];
-        if ($this->isMethod('patch')) {
+        if ($this->isMethod('PATCH')) {
             return [
                 'text' => 'required|string|max:255',
-                'type' => ['required', Rule::in($acceptedTypes)],
             ];
         }
         return [
