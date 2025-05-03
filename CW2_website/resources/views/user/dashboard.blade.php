@@ -33,19 +33,18 @@
                                 <td class="text-sm md:text-base p-2 justify-items-center flex flex-col">
                                     @if ($questInstance->status == 'Live')
                                         <a class="cursor-pointer bg-brightgreen text-black font-semibold text-sm md:text-base uppercase rounded-lg p-2 hover:bg-darkgreen hover:text-white hover:font-bold active:scale-95 transition-transform transform m-2 self-center min-w-3/5 max-w-9/10 text-center w-4/5" href="{{ route('questionnaires.show', $questInstance->id) }}">Respondent view</a>
-                                        <form action="{{ route('questionnaires.close', $questInstance->id) }}" method="POST" onsubmit="return confirm('Are you sure you want to close this questionnaire?');" class="w-full flex justify-center">
+                                        <form action="{{ route('questionnaires.status', $questInstance->id) }}" method="POST" onsubmit="return confirm('Are you sure you want to close this questionnaire?');" class="w-full flex justify-center">
                                             @csrf
                                             @method('PATCH')
-                                            <input type="hidden" name="title" id="title" value="{{ $questInstance->title }}">
-                                            <input type="hidden" name="description" id="description" value="{{ $questInstance->description }}">
                                             <input type="hidden" name="status" id="status" value="Closed">
                                             <button class="cursor-pointer bg-brightgreen text-black font-semibold text-sm md:text-base uppercase rounded-lg p-2 hover:bg-darkgreen hover:text-white hover:font-bold active:scale-95 transition-transform transform m-2 self-center min-w-3/5 max-w-9/10 text-center w-4/5">Stop responses</button>
                                         </form>
                                     @else
-                                        <form action="{{ route('questionnaires.update', $questInstance->status=='Live',$questInstance->id) }}" method="POST" onsubmit="return confirm('Are you sure you want to make this questionnaire live?');" class="w-full flex justify-center">
-                                        @csrf
-                                        @method('PATCH')
-                                            <button class="cursor-pointer bg-brightgreen text-black font-semibold text-sm md:text-base uppercase rounded-lg p-2 hover:bg-darkgreen hover:text-white hover:font-bold active:scale-95 transition-transform transform m-2 self-center min-w-3/5 max-w-9/10 text-center w-4/5">Make Live</button>
+                                        <form action="{{ route('questionnaires.status', $questInstance->id) }}" method="POST" onsubmit="return confirm('Are you sure you want to make this questionnaire live?');" class="w-full flex justify-center">
+                                            @csrf
+                                            @method('PATCH')
+                                            <input type="hidden" name="status" id="status" value="Live">
+                                            <button class="cursor-pointer bg-brightgreen text-black font-semibold text-sm md:text-base uppercase rounded-lg p-2 hover:bg-darkgreen hover:text-white hover:font-bold active:scale-95 transition-transform transform m-2 self-center min-w-3/5 max-w-9/10 text-center w-4/5">Make live</button>
                                         </form>
                                         <a class="cursor-pointer bg-brightgreen text-black font-semibold text-sm md:text-base uppercase rounded-lg p-2 hover:bg-darkgreen hover:text-white hover:font-bold active:scale-95 transition-transform transform m-2 self-center min-w-3/5 max-w-9/10 text-center w-4/5" href="{{ route('questionnaires.show', $questInstance->id) }}">Edit</a>
                                     @endif

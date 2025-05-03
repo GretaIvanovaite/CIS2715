@@ -19,11 +19,11 @@ class Question extends Model
         return $this->belongsTo(Questionnaire::class);
     }
 
-    public function questionOption(){
+    public function questionOptions(){
         return $this->hasMany(QuestionOption::class)->chaperone();
     }
 
-    public function columnValue(){
+    public function columnValues(){
         return $this->hasMany(ColumnValue::class)->chaperone();
     }
 

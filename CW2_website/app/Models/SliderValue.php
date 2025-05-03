@@ -14,4 +14,8 @@ class SliderValue extends Model
         'max',
         'step',
     ];
+
+    public function question(){
+        return $this->belongsTo(Question::class);
+    }
 }

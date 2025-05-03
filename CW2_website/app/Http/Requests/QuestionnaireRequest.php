@@ -23,13 +23,24 @@ class QuestionnaireRequest extends FormRequest
     public function rules(): array
     {
         $acceptedStatus = ['In development', 'Live', 'Closed'];
-        if ($this->isMethod('patch')) {
-            return [
-                'title' => 'unique:questionnaires|required|string|max:255',
+        if ($this->isMethod('PATCH')) {
+            $rules = [
                 'description' => 'nullable|string',
                 'status' => ['required', 'string', Rule::in($acceptedStatus)],
             ];
+    
+            if ($this->has('title')) {
+                $questionnaireId = $this->route('questionnaire')->id ?? null;
+                $rules['title'] = [
+                    'required',
+                    'string',
+                    'max:255',
+                    Rule::unique('questionnaires')->ignore($questionnaireId),
+                ];
+            }
+            return $rules;
         }
+
         return [
             'title' => 'unique:questionnaires|required|string|max:255',
             'description' => 'nullable|string',

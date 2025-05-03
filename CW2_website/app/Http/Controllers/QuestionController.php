@@ -24,7 +24,10 @@ class QuestionController extends Controller
     {
         Question::create($request->validated());
 
-        return redirect()->route('questionnaires.show', $request->questionnaire_id)->with('success', 'Question created successfully!');
+        if ($request->type == 'Short-text' || $request->type == 'Long-text')
+            return redirect()->route('questionnaires.show', $request->questionnaire_id)->with('success', 'Question created successfully!');
+        else
+            return redirect()->route('options.create', $request->id)->with('success', 'Question created successfully!');
     }
 
     /**

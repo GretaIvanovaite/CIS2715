@@ -15,7 +15,6 @@ Route::get('/signup', [UserController::class, 'create'])->name('signup');
 //Route::prefix('user')->group(function(){
 //    Route::get('/dashboard', [UserController::class, 'authenticate'])->name('dashboard');
 //});
-
 Route::get('/user/dashboard/', [DashboardController::class, 'index'])->name('dashboard');
 
 Route::controller(QuestionnaireController::class)->group(function () {
@@ -23,9 +22,10 @@ Route::controller(QuestionnaireController::class)->group(function () {
     Route::get('/questionnaires/edit/{questionnaire}', 'edit')->name('questionnaires.edit');
     Route::post('/questionnaires/store', 'store')->name('questionnaires.store');
     Route::patch('/questionnaires/update/{questionnaire}', 'update')->name('questionnaires.update');
-    Route::patch('/questionnaires/close/{questionnaire}', 'close')->name('questionnaires.close');
+    Route::patch('/questionnaires/status/{questionnaire}', 'status')->name('questionnaires.status');
     Route::delete('/questionnaires/delete/{questionnaire}', 'destroy')->name('questionnaires.destroy');
 });
+Route::get('/questionnaires/{questionnaire}', [QuestionnaireController::class, 'show'])->name('questionnaires.show');
 
 Route::controller(QuestionController::class)->group(function () {
     Route::get('/questions/create/{questionnaire}', 'create')->name('questions.create');
@@ -35,4 +35,28 @@ Route::controller(QuestionController::class)->group(function () {
     Route::delete('/questions/delete/{question}', 'destroy')->name('questions.destroy');
 });
 
-Route::get('/questionnaires/{questionnaire}', [QuestionnaireController::class, 'show'])->name('questionnaires.show');
+Route::controller(OptionController::class)->group(function () {
+    Route::get('/options/create/{question}', 'create')->name('options.create');
+    Route::get('/options/edit/{question}', 'edit')->name('options.edit');
+    Route::post('/options/store', 'store')->name('options.store');
+    Route::patch('/options/update/{questionOption}', 'update')->name('options.update');
+    Route::delete('/options/delete/{questionOption}', 'destroy')->name('options.destroy');
+});
+
+Route::controller(ColumnValueController::class)->group(function () {
+    Route::get('/columns/create/{question}', 'create')->name('columns.create');
+    Route::get('/columns/edit/{question}', 'edit')->name('columns.edit');
+    Route::post('/columns/store', 'store')->name('columns.store');
+    Route::patch('/columns/update/{columnValue}', 'update')->name('columns.update');
+    Route::delete('/columns/delete/{columnValue}', 'destroy')->name('columns.destroy');
+});
+
+Route::controller(RangeSliderController::class)->group(function () {
+    Route::get('/range/create/{question}', 'create')->name('range.create');
+    Route::get('/range/edit/{rangeSlider}', 'edit')->name('range.edit');
+    Route::post('/range/store', 'store')->name('range.store');
+    Route::patch('/range/update/{rangeSlider}', 'update')->name('range.update');
+    Route::delete('/range/delete/{rangeSlider}', 'destroy')->name('range.destroy');
+});
+
+

@@ -11,7 +11,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('slider_value', function (Blueprint $table) {
+        Schema::create('slider_values', function (Blueprint $table) {
             $table->id();
             $table->integer('min');
             $table->integer('max');
@@ -27,6 +27,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('slider_value');
+        Schema::dropIfExists('slider_values');
     }
 };

@@ -3,10 +3,13 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-Use App\Models\Question;
-Use App\Models\QuestionOption;
 Use App\Models\Questionnaire;
 Use App\Http\Requests\QuestionnaireRequest;
+Use App\Models\Question;
+Use App\Models\QuestionOption;
+Use App\Models\ColumnValue;
+Use App\Models\SliderValue;
+
 
 class QuestionnaireController extends Controller
 {
@@ -43,8 +46,7 @@ class QuestionnaireController extends Controller
      */
     public function show(Questionnaire $questionnaire)
     {
-        $questions = Question::where('questionnaire_id', $questionnaire->id)->get();
-        $questionOptions = QuestionOption::where('question_id',  $questionnaire->id)->get();
+        $questions = Question::where('questionnaire_id', $questionnaire->id)->withCount(['questionOptions', 'columnValues'])->get();
         return view('questionnaires.show', compact('questionnaire', 'questions'));
     }
 
@@ -68,10 +70,10 @@ class QuestionnaireController extends Controller
     /**
      * Update the squestionnaire status from the user dashboard.
      */
-    public function close(QuestionnaireRequest $request, Questionnaire $questionnaire)
+    public function status(QuestionnaireRequest $request, Questionnaire $questionnaire)
     {
         $questionnaire->update($request->validated());
-        return redirect()->route('dashboard')->with('success', 'Questionnaire details updated successfully!');
+        return redirect()->route('dashboard')->with('success', 'Questionnaire status updated successfully!');
     }
 
     /**

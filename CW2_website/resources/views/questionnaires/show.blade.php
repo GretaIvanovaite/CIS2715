@@ -29,7 +29,7 @@
                     @break
                 @case('Tick-one')
                     <ul>
-                        @foreach ($question->questionOption as $option)
+                        @foreach ($question->questionOptions as $option)
                         @php
                             $optionNumber = $loop->iteration;
                         @endphp
@@ -42,7 +42,7 @@
                     @break
                 @case('Tick-many')
                     <ul>
-                        @foreach ($question->questionOption as $option)
+                        @foreach ($question->questionOptions as $option)
                         @php
                             $optionNumber = $loop->iteration;
                         @endphp
@@ -56,15 +56,15 @@
                 @case('Grid')
                     <section class="grid grid-flow-row-dense auto-cols-max auto-rows-max justify-items-center-safe items-center">
                         <p class="col-1 row-1">
-                        @foreach ($question->columnValue as $column)
+                        @foreach ($question->columnValues as $column)
                             <p class="col-{{$loop->iteration + 1}} row-1 px-2 justify-self-center-safe self-center-safe">{{$column->text}}</p>
                         @endforeach
-                        @foreach ($question->questionOption as $row)
+                        @foreach ($question->questionOptions as $row)
                             @php
                                 $rowNumber = $loop->iteration;
                             @endphp
-                            <P class="text-sm md:text-base self-center justify-self-start col-1 row-{{$rowNumber + 1}} pr-5 my-1 md:my-3">{{$row->text}}</P>
-                            @foreach ($question->columnValue as $column)
+                            <p class="text-sm md:text-base self-center justify-self-start col-1 row-{{$rowNumber + 1}} pr-5 my-1 md:my-3">{{$row->text}}</p>
+                            @foreach ($question->columnValues as $column)
                                 <input type="radio" aria-label="{{$row->text}} - Option {{$loop->iteration}}" id="question{{$question_number}}-row{{$rowNumber}}-option{{$loop->iteration}}" name="question{{$question_number}}-row{{$rowNumber}}-option{{$loop->iteration}}" class="min-h-4 h-2/5 w-auto aspect-square mx-1 md:mx-3 row-{{$rowNumber + 1}} col-{{$loop->iteration + 1}} justify-self-center-safe self-center-safe">
                             @endforeach
                         @endforeach
@@ -84,7 +84,29 @@
         @if ($questionnaire->status != 'Live') {{--&& $questionnaire->user_id == $auth()->user()->id)--}}
             <article id="actions" class="flex justify-between mb-6 px-2 lg:max-w-4/5">
                 <div class="max-w-7/10 h-auto flex">
-                    <a class="cursor-pointer bg-brightgreen text-black font-semibold text-sm md:text-base uppercase rounded-lg p-2 hover:bg-darkgreen hover:text-white hover:font-bold active:scale-95 transition-transform transform self-center min-w-auto text-center justify-self-end-safe self-center mt-3 mb-6" href="{{ route('questions.edit', $question->id) }}">Edit question</a>
+                    <a class="cursor-pointer bg-brightgreen text-black font-semibold text-sm md:text-base uppercase rounded-lg p-2 hover:bg-darkgreen hover:text-white hover:font-bold active:scale-95 transition-transform transform self-center min-w-auto text-center justify-self-end-safe self-center mt-3 mb-6 mr-2" href="{{ route('questions.edit', $question->id) }}">Edit question</a>
+                    @switch($question->type)
+                        @case('Tick-one')
+                        @case('Tick-many')
+                            <a class="cursor-pointer bg-brightgreen text-black font-semibold text-sm md:text-base uppercase rounded-lg p-2 hover:bg-darkgreen hover:text-white hover:font-bold active:scale-95 transition-transform transform self-center min-w-auto text-center justify-self-end-safe self-center mt-3 mb-6 mr-2" href="{{ route('options.create', $question->id) }}">Add options</a>
+                            @if ($question->question_options_count != 0)
+                                <a class="cursor-pointer bg-brightgreen text-black font-semibold text-sm md:text-base uppercase rounded-lg p-2 hover:bg-darkgreen hover:text-white hover:font-bold active:scale-95 transition-transform transform self-center min-w-auto text-center justify-self-end-safe self-center mt-3 mb-6 mr-2" href="{{ route('options.edit', $question->id) }}">Edit options</a>
+                            @endif
+                            @break
+                        @case('Grid')
+                            <a class="cursor-pointer bg-brightgreen text-black font-semibold text-sm md:text-base uppercase rounded-lg p-2 hover:bg-darkgreen hover:text-white hover:font-bold active:scale-95 transition-transform transform self-center min-w-auto text-center justify-self-end-safe self-center mt-3 mb-6 mr-2" href="{{ route('options.create', $question->id) }}">Add options</a>
+                            @if ($question->question_options_count != 0)
+                                <a class="cursor-pointer bg-brightgreen text-black font-semibold text-sm md:text-base uppercase rounded-lg p-2 hover:bg-darkgreen hover:text-white hover:font-bold active:scale-95 transition-transform transform self-center min-w-auto text-center justify-self-end-safe self-center mt-3 mb-6 mr-2" href="{{ route('options.edit', $question->id) }}">Edit options</a>
+                            @endif
+                            <a class="cursor-pointer bg-brightgreen text-black font-semibold text-sm md:text-base uppercase rounded-lg p-2 hover:bg-darkgreen hover:text-white hover:font-bold active:scale-95 transition-transform transform self-center min-w-auto text-center justify-self-end-safe self-center mt-3 mb-6 mr-2" href="{{ route('columns.create', $question->id) }}">Add column values</a>
+                            @if ($question->column_values_count != 0)
+                                <a class="cursor-pointer bg-brightgreen text-black font-semibold text-sm md:text-base uppercase rounded-lg p-2 hover:bg-darkgreen hover:text-white hover:font-bold active:scale-95 transition-transform transform self-center min-w-auto text-center justify-self-end-safe self-center mt-3 mb-6 mr-2" href="{{ route('columns.edit', $question->id) }}">Edit column values</a>
+                            @endif
+                            @break
+                        @case('Range')
+                            <a class="cursor-pointer bg-brightgreen text-black font-semibold text-sm md:text-base uppercase rounded-lg p-2 hover:bg-darkgreen hover:text-white hover:font-bold active:scale-95 transition-transform transform self-center min-w-auto text-center justify-self-end-safe self-center mt-3 mb-6 mr-2" href="{{ route('range.edit', $question->sliderValue) }}">Edit range values</a>
+                            @break
+                    @endswitch
                 </div>
                 <form action="{{ route('questions.destroy', $question->id) }}" method="POST" onsubmit="return confirm('Are you sure you want to delete this question?');" class="max-w-3/10 h-auto flex">
                     @csrf

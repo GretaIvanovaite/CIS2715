@@ -16,7 +16,7 @@ class Questionnaire extends Model
         'user_id',
     ];
 
-    public function question(){
+    public function questions(){
         return $this->hasMany(Question::class)->chaperone();
     }
 }
