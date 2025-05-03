@@ -14,45 +14,44 @@ class QuestionController extends Controller
      */
     public function create(Questionnaire $questionnaire)
     {
-        return view('questions.create', compact('questionnaire'));
+        return view('questionnaires.questions.create', compact('questionnaire'));
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(QuestionRequest $request)
+    public function store(Questionnaire $questionnaire, QuestionRequest $request)
     {
         Question::create($request->validated());
 
         if ($request->type == 'Short-text' || $request->type == 'Long-text')
-            return redirect()->route('questionnaires.show', $request->questionnaire_id)->with('success', 'Question created successfully!');
+            return redirect()->route('questionnaires.show', $questionnaire->id)->with('success', 'Question created successfully!');
         else
-            return redirect()->route('options.create', $request->id)->with('success', 'Question created successfully!');
+            return redirect()->route('questionnaires.questions.options.create', $request->id)->with('success', 'Question created successfully!');
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Question $question)
+    public function edit(Questionnaire $questionnaire, Question $question)
     {
-        return view('questions.edit', compact('question'));
+        return view('questionnaires.questions.edit', compact(['questionnaire', 'question']));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(QuestionRequest $request, Question $question)
+    public function update(Questionnaire $questionnaire, Question $question, QuestionRequest $request)
     {
         $question->update($request->validated());
-        return redirect()->route('questionnaires.show', $question->questionnaire_id)->with('success', 'Question details updated successfully!');
+        return redirect()->route('questionnaires.show', $questionnaire->id)->with('success', 'Question details updated successfully!');
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Question $question)
+    public function destroy(Questionnaire $questionnaire, Question $question)
     {
-        $questionnaire = $question->questionnaire_id;
         $question->delete();
         return redirect()->route('questionnaires.show', $questionnaire)->with('success', 'Question deleted successfully!');
     }

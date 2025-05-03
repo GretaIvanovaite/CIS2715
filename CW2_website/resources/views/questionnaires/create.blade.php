@@ -7,7 +7,7 @@
 @section('main-content')
    <section id='create_questionnaire' class="flex flex-col w-full lg:w-1/2 mx-auto p-8 lg:p-10 rounded-2xl shadow-xl bg-white">
         <h2 class="text-lg md:text-xl font-bold pb-8 my-auto">Please enter your questionnaire details</h2>
-        <form class="flex flex-col" id="questionnaire_form" method="POST" action="{{ route('questionnaires.store') }}">
+        <form class="flex flex-col" id="questionnaire_form" method="POST" action="{{ route('questionnaires.store', $questionnaire->id) }}">
             @csrf
             <label for="title" class="block mb-2 text-sm md:text-base font-medium text-black">Questionnaire title</label>
             @error('title')

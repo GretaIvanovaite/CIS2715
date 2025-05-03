@@ -6,51 +6,51 @@ use Illuminate\Http\Request;
 Use App\Http\Requests\QuestionOptionRequest;
 Use App\Models\QuestionOption;
 Use App\Models\Question;
+Use App\Models\Questionnaire;
 
 class OptionController extends Controller
 {
     /**
      * Show the form for creating a new resource.
      */
-    public function create(Question $question)
+    public function create(Questionnaire $questionnaire, Question $question)
     {
-        return view('questionOptions.create', compact('question'));
+        return view('questionnaires.questions.questionOptions.create', compact('question'));
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(QuestionOptionRequest $request)
+    public function store(Questionnaire $questionnaire, Question $question, QuestionOption $option, QuestionOptionRequest $request)
     {
         QuestionOption::create($request->validated());
 
-        return redirect()->route('questionnaires.show', $request->question->questionnaire_id)->with('success', 'Question option created successfully!');
+        return redirect()->route('questionnaires.show', $questionnaire->id)->with('success', 'Question option created successfully!');
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Question $question)
+    public function edit(Questionnaire $questionnaire, Question $question, QuestionOption $option)
     {
-        return view('options.edit', compact('question'));
+        return view('questionnaires.questions.options.edit', compact('question'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(QuestionOptionRequest $request, QuestionOption $option)
+    public function update(Questionnaire $questionnaire, Question $question, QuestionOption $option, QuestionOptionRequest $request)
     {
         $option->update($request->validated());
-        return redirect()->route('questionnaires.show', $option->question->questionnaire_id)->with('success', 'Question option updated successfully!');
+        return redirect()->route('questionnaires.show', $questionnaire->id)->with('success', 'Question option updated successfully!');
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(QuestionOption $option)
+    public function destroy(Questionnaire $questionnaire, Question $question, QuestionOption $option)
     {
-        $option = $option->question_id;
         $option->delete();
-        return redirect()->route('questionnaires.show', $option->question->questionnaire_id)->with('success', 'Question option deleted successfully!');
+        return redirect()->route('questionnaires.show', $questionnaire->id)->with('success', 'Question option deleted successfully!');
     }
 }
