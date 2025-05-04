@@ -11,6 +11,14 @@ Use App\Models\Questionnaire;
 class OptionController extends Controller
 {
     /**
+     * Display the specified resource.
+     */
+    public function show(Questionnaire $questionnaire, Question $question)
+    {
+        return view('questionnaires.questions.questionOptions.show', compact('questionnaire', 'question'));
+    }
+
+    /**
      * Show the form for creating a new resource.
      */
     public function create(Questionnaire $questionnaire, Question $question)
@@ -36,7 +44,7 @@ class OptionController extends Controller
      */
     public function edit(Questionnaire $questionnaire, Question $question, QuestionOption $option)
     {
-        return view('questionnaires.questions.questionOptions.edit', compact('question'));
+        return view('questionnaires.questions.questionOptions.edit', compact('questionnaire', 'question', 'option'));
     }
 
     /**
@@ -45,11 +53,8 @@ class OptionController extends Controller
     public function update(Questionnaire $questionnaire, Question $question, QuestionOption $option, QuestionOptionRequest $request)
     {
         $option->update($request->validated());
-        $next_option = QuestionOption::where('question_id', $question->id + 1)->get();
-        if ($request->next == 'Y')
-            return view('questionnaires.questions.questionOptions.edit', compact('questionnaire', 'question', 'next_option'))->with('success', 'Question option updated successfully!');
-        else
-            return redirect()->route('questionnaires.show', $questionnaire->id)->with('success', 'Question option updated successfully!');
+        
+        return redirect()->route('options.show', compact('questionnaire', 'question', 'option'))->with('success', 'Question option updated successfully!');
     }
 
     /**
@@ -58,6 +63,6 @@ class OptionController extends Controller
     public function destroy(Questionnaire $questionnaire, Question $question, QuestionOption $option)
     {
         $option->delete();
-        return redirect()->route('questionnaires.show', $questionnaire->id)->with('success', 'Question option deleted successfully!');
+        return redirect()->route('options.show', compact('questionnaire', 'question'))->with('success', 'Question option deleted successfully!');
     }
 }

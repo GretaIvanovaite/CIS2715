@@ -83,20 +83,20 @@
         </article>
         @if ($questionnaire->status != 'Live') {{--&& $questionnaire->user_id == $auth()->user()->id)--}}
             <article id="actions" class="flex justify-between mb-6 px-2 lg:max-w-4/5">
-                <div class="max-w-7/10 h-auto flex">
+                <div class="max-w-8/10 h-auto flex">
                     <a class="cursor-pointer bg-brightgreen text-black font-semibold text-sm md:text-base uppercase rounded-lg p-2 hover:bg-darkgreen hover:text-white hover:font-bold active:scale-95 transition-transform transform self-center min-w-auto text-center justify-self-end-safe self-center mt-3 mb-6 mr-2" href="{{ route('questions.edit', [$questionnaire, $question]) }}">Edit question</a>
                     @switch($question->type)
                         @case('Tick-one')
                         @case('Tick-many')
-                            <a class="cursor-pointer bg-brightgreen text-black font-semibold text-sm md:text-base uppercase rounded-lg p-2 hover:bg-darkgreen hover:text-white hover:font-bold active:scale-95 transition-transform transform self-center min-w-auto text-center justify-self-end-safe self-center mt-3 mb-6 mr-2" href="{{ route('options.create', [$questionnaire->id, $question->id]) }}">Add options</a>
+                            <a class="cursor-pointer bg-brightgreen text-black font-semibold text-sm md:text-base uppercase rounded-lg p-2 hover:bg-darkgreen hover:text-white hover:font-bold active:scale-95 transition-transform transform self-center min-w-auto text-center justify-self-end-safe self-center mt-3 mb-6 mr-2" href="{{ route('options.create', [$questionnaire->id, $question->id]) }}">Add an option</a>
                             @if ($question->question_options_count != 0)
-                                <a class="cursor-pointer bg-brightgreen text-black font-semibold text-sm md:text-base uppercase rounded-lg p-2 hover:bg-darkgreen hover:text-white hover:font-bold active:scale-95 transition-transform transform self-center min-w-auto text-center justify-self-end-safe self-center mt-3 mb-6 mr-2" href="{{ route('options.edit', [$questionnaire->id, $question->id]) }}">Edit options</a>
+                                <a class="cursor-pointer bg-brightgreen text-black font-semibold text-sm md:text-base uppercase rounded-lg p-2 hover:bg-darkgreen hover:text-white hover:font-bold active:scale-95 transition-transform transform self-center min-w-auto text-center justify-self-end-safe self-center mt-3 mb-6 mr-2" href="{{ route('options.show', [$questionnaire->id, $question->id]) }}">Edit options</a>
                             @endif
                             @break
                         @case('Grid')
                             <a class="cursor-pointer bg-brightgreen text-black font-semibold text-sm md:text-base uppercase rounded-lg p-2 hover:bg-darkgreen hover:text-white hover:font-bold active:scale-95 transition-transform transform self-center min-w-auto text-center justify-self-end-safe self-center mt-3 mb-6 mr-2" href="{{ route('options.create', [$questionnaire->id, $question->id]) }}">Add options</a>
                             @if ($question->question_options_count != 0)
-                                <a class="cursor-pointer bg-brightgreen text-black font-semibold text-sm md:text-base uppercase rounded-lg p-2 hover:bg-darkgreen hover:text-white hover:font-bold active:scale-95 transition-transform transform self-center min-w-auto text-center justify-self-end-safe self-center mt-3 mb-6 mr-2" href="{{ route('options.edit', [$questionnaire->id, $question->id]) }}">Edit options</a>
+                                <a class="cursor-pointer bg-brightgreen text-black font-semibold text-sm md:text-base uppercase rounded-lg p-2 hover:bg-darkgreen hover:text-white hover:font-bold active:scale-95 transition-transform transform self-center min-w-auto text-center justify-self-end-safe self-center mt-3 mb-6 mr-2" href="{{ route('options.show', [$questionnaire->id, $question->id]) }}">Edit options</a>
                             @endif
                             <a class="cursor-pointer bg-brightgreen text-black font-semibold text-sm md:text-base uppercase rounded-lg p-2 hover:bg-darkgreen hover:text-white hover:font-bold active:scale-95 transition-transform transform self-center min-w-auto text-center justify-self-end-safe self-center mt-3 mb-6 mr-2" href="{{ route('columns.create', [$questionnaire->id, $question->id]) }}">Add column values</a>
                             @if ($question->column_values_count != 0)
@@ -108,7 +108,7 @@
                             @break
                     @endswitch
                 </div>
-                <form action="{{ route('questions.destroy', [$questionnaire->id, $question->id]) }}" method="POST" onsubmit="return confirm('Are you sure you want to delete this question?');" class="max-w-3/10 h-auto flex">
+                <form action="{{ route('questions.destroy', [$questionnaire->id, $question->id]) }}" method="POST" onsubmit="return confirm('Are you sure you want to delete this question?');" class="max-w-2/10 h-auto flex">
                     @csrf
                     @method('DELETE')
                     <button class="cursor-pointer bg-[#C1121F] text-white font-semibold text-sm md:text-base uppercase rounded-lg p-2 hover:bg-darkgreen hover:text-white hover:font-bold active:scale-95 transition-transform transform mt-3 mb-6 self-center max-w-9/10 text-center justify-self-end-safe self-center min-w-25 max-h-4/5">Delete</button>

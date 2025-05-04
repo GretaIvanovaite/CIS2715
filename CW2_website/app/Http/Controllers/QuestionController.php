@@ -27,7 +27,7 @@ class QuestionController extends Controller
         if ($request->type == 'Short-text' || $request->type == 'Long-text')
             return redirect()->route('questionnaires.show', $questionnaire->id)->with('success', 'Question created successfully!');
         else
-            return view('questionnaires.questions.questionOptions.create', compact('questionnaire', 'question'))->with('success', 'Question created successfully!');
+            return redirect()->route('options.create', compact('questionnaire', 'question'))->with('success', 'Question created successfully!');
     }
 
     /**
@@ -35,7 +35,7 @@ class QuestionController extends Controller
      */
     public function edit(Questionnaire $questionnaire, Question $question)
     {
-        return view('questions.edit', compact(['questionnaire', 'question']));
+        return view('questionnaires.questions.edit', compact(['questionnaire', 'question']));
     }
 
     /**

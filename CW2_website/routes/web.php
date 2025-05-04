@@ -44,6 +44,7 @@ Route::controller(OptionController::class)->group(function () {
     Route::post('/questionnaires/{questionnaire}/questions/{question}/questionOptions/store', 'store')->name('options.store');
     Route::patch('/questionnaires/{questionnaire}/questions/{question}/questionOptions/update/{option}', 'update')->name('options.update');
     Route::delete('/questionnaires/{questionnaire}/questions/{question}/questionOptions/delete/{option}', 'destroy')->name('options.destroy');
+    Route::get('/questionnaires/{questionnaire}/questions/{question}/questionOptions/show/', 'show')->name('options.show');
 });
 
 Route::controller(ColumnValueController::class)->group(function () {
