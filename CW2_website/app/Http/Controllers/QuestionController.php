@@ -22,12 +22,12 @@ class QuestionController extends Controller
      */
     public function store(Questionnaire $questionnaire, QuestionRequest $request)
     {
-        Question::create($request->validated());
+        $question = Question::create($request->validated());
 
         if ($request->type == 'Short-text' || $request->type == 'Long-text')
             return redirect()->route('questionnaires.show', $questionnaire->id)->with('success', 'Question created successfully!');
         else
-            return redirect()->route('questionnaires.questions.options.create', $request->id)->with('success', 'Question created successfully!');
+            return view('questionnaires.questions.questionOptions.create', compact('questionnaire', 'question'))->with('success', 'Question created successfully!');
     }
 
     /**
@@ -35,7 +35,7 @@ class QuestionController extends Controller
      */
     public function edit(Questionnaire $questionnaire, Question $question)
     {
-        return view('questionnaires.questions.edit', compact(['questionnaire', 'question']));
+        return view('questions.edit', compact(['questionnaire', 'question']));
     }
 
     /**

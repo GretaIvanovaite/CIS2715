@@ -11,7 +11,7 @@ class QuestionOptionRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -23,6 +23,7 @@ class QuestionOptionRequest extends FormRequest
     {
         return [
             'text' => 'required|string|max:255',
+            'question_id' => 'required|integer',
         ];
     }
 }

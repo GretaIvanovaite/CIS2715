@@ -15,7 +15,7 @@ class OptionController extends Controller
      */
     public function create(Questionnaire $questionnaire, Question $question)
     {
-        return view('questionnaires.questions.questionOptions.create', compact('question'));
+        return view('questionnaires.questions.questionOptions.create', compact('questionnaire', 'question'));
     }
 
     /**
@@ -25,7 +25,10 @@ class OptionController extends Controller
     {
         QuestionOption::create($request->validated());
 
-        return redirect()->route('questionnaires.show', $questionnaire->id)->with('success', 'Question option created successfully!');
+        if ($request->again == 'Y')
+            return view('questionnaires.questions.questionOptions.create', compact('questionnaire', 'question'))->with('success', 'Question option added successfully!');
+        else
+            return redirect()->route('questionnaires.show', $questionnaire->id)->with('success', 'Question option created successfully!');
     }
 
     /**
@@ -33,7 +36,7 @@ class OptionController extends Controller
      */
     public function edit(Questionnaire $questionnaire, Question $question, QuestionOption $option)
     {
-        return view('questionnaires.questions.options.edit', compact('question'));
+        return view('questionnaires.questions.questionOptions.edit', compact('question'));
     }
 
     /**
@@ -42,7 +45,11 @@ class OptionController extends Controller
     public function update(Questionnaire $questionnaire, Question $question, QuestionOption $option, QuestionOptionRequest $request)
     {
         $option->update($request->validated());
-        return redirect()->route('questionnaires.show', $questionnaire->id)->with('success', 'Question option updated successfully!');
+        $next_option = QuestionOption::where('question_id', $question->id + 1)->get();
+        if ($request->next == 'Y')
+            return view('questionnaires.questions.questionOptions.edit', compact('questionnaire', 'question', 'next_option'))->with('success', 'Question option updated successfully!');
+        else
+            return redirect()->route('questionnaires.show', $questionnaire->id)->with('success', 'Question option updated successfully!');
     }
 
     /**

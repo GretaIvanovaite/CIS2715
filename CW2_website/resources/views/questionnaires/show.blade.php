@@ -33,7 +33,7 @@
                         @php
                             $optionNumber = $loop->iteration;
                         @endphp
-                        <li class="py-2 m-2 flex justify-start content-center flex-wrap">
+                        <li class="py-2 m-2 flex justify-start content-center flex-wrap items-center">
                             <input type="radio" id="question{{$question_number}}-option{{$optionNumber}}" name="question{{$question_number}}" value="{{$option->text}}" class="min-h-4 h-full w-auto aspect-square mr-1 md:mr-3">
                             <label for="question{{$question_number}}-option{{$optionNumber}}" class="inline-block text-sm md:text-base align-middle self-center">{{$option->text}}</label>
                         </li>
@@ -46,7 +46,7 @@
                         @php
                             $optionNumber = $loop->iteration;
                         @endphp
-                        <li class="py-2 m-2 flex justify-start content-center flex-wrap">
+                        <li class="py-2 m-2 flex justify-start content-center flex-wrap items-center">
                             <input type="checkbox" id="question{{$question_number}}-option{{$optionNumber}}" name="question{{$optionNumber}}" value="{{$option->text}}" class="min-h-4 h-full w-auto aspect-square mr-1 md:mr-3">
                             <label for="question{{$question_number}}-option{{$optionNumber}}" class="inline-block text-sm md:text-base align-middle self-center">{{$option->text}}</label>
                         </li>
@@ -84,7 +84,7 @@
         @if ($questionnaire->status != 'Live') {{--&& $questionnaire->user_id == $auth()->user()->id)--}}
             <article id="actions" class="flex justify-between mb-6 px-2 lg:max-w-4/5">
                 <div class="max-w-7/10 h-auto flex">
-                    <a class="cursor-pointer bg-brightgreen text-black font-semibold text-sm md:text-base uppercase rounded-lg p-2 hover:bg-darkgreen hover:text-white hover:font-bold active:scale-95 transition-transform transform self-center min-w-auto text-center justify-self-end-safe self-center mt-3 mb-6 mr-2" href="{{ route('questions.edit', [$questionnaire->id, $question->id]) }}">Edit question</a>
+                    <a class="cursor-pointer bg-brightgreen text-black font-semibold text-sm md:text-base uppercase rounded-lg p-2 hover:bg-darkgreen hover:text-white hover:font-bold active:scale-95 transition-transform transform self-center min-w-auto text-center justify-self-end-safe self-center mt-3 mb-6 mr-2" href="{{ route('questions.edit', [$questionnaire, $question]) }}">Edit question</a>
                     @switch($question->type)
                         @case('Tick-one')
                         @case('Tick-many')
@@ -111,7 +111,7 @@
                 <form action="{{ route('questions.destroy', [$questionnaire->id, $question->id]) }}" method="POST" onsubmit="return confirm('Are you sure you want to delete this question?');" class="max-w-3/10 h-auto flex">
                     @csrf
                     @method('DELETE')
-                    <button class="cursor-pointer bg-[#C1121F] text-white font-semibold text-sm md:text-base uppercase rounded-lg p-2 hover:bg-darkgreen hover:text-white hover:font-bold active:scale-95 transition-transform transform mt-3 mb-6 self-center min-w-3/5 max-w-9/10 text-center justify-self-end-safe self-center min-w-25">Delete</button>
+                    <button class="cursor-pointer bg-[#C1121F] text-white font-semibold text-sm md:text-base uppercase rounded-lg p-2 hover:bg-darkgreen hover:text-white hover:font-bold active:scale-95 transition-transform transform mt-3 mb-6 self-center max-w-9/10 text-center justify-self-end-safe self-center min-w-25 max-h-4/5">Delete</button>
                 </form>
             </article>
         @endif

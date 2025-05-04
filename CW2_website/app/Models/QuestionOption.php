@@ -11,6 +11,7 @@ class QuestionOption extends Model
 
     protected $fillable = [
         'text',
+        'question_id',
     ];
 
     public function question(){

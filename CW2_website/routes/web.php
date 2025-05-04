@@ -32,18 +32,18 @@ Route::get('/questionnaires/{questionnaire}', [QuestionnaireController::class, '
 
 Route::controller(QuestionController::class)->group(function () {
     Route::get('/questionnaires/{questionnaire}/questions/create/', 'create')->name('questions.create');
-    Route::get('/questionnaires/{questionnaire}/questions/edit/{question}', 'edit')->name('questions.edit');
+    Route::get('/questionnaires/{questionnaire}/questions/{question}/edit/', 'edit')->name('questions.edit');
     Route::post('/questionnaires/{questionnaire}/questions/store', 'store')->name('questions.store');
-    Route::patch('/questionnaires/{questionnaire}/questions/update/{question}', 'update')->name('questions.update');
-    Route::delete('/questionnaires/{questionnaire}/questions/delete/{question}', 'destroy')->name('questions.destroy');
+    Route::patch('/questionnaires/{questionnaire}/questions/{question}/update/', 'update')->name('questions.update');
+    Route::delete('/questionnaires/{questionnaire}/questions/{question}/delete/', 'destroy')->name('questions.destroy');
 });
 
 Route::controller(OptionController::class)->group(function () {
-    Route::get('/questionnaires/{questionnaire}/questions/{question}/options/create/', 'create')->name('options.create');
-    Route::get('/questionnaires/{questionnaire}/questions/{question}/options/edit/', 'edit')->name('options.edit');
-    Route::post('/questionnaires/{questionnaire}/questions/{question}/options/store', 'store')->name('options.store');
-    Route::patch('/questionnaires/{questionnaire}/questions/{question}/options/update/{questionOption}', 'update')->name('options.update');
-    Route::delete('/questionnaires/{questionnaire}/questions/{question}/options/delete/{questionOption}', 'destroy')->name('options.destroy');
+    Route::get('/questionnaires/{questionnaire}/questions/{question}/questionOptions/create/', 'create')->name('options.create');
+    Route::get('/questionnaires/{questionnaire}/questions/{question}/questionOptions/edit/', 'edit')->name('options.edit');
+    Route::post('/questionnaires/{questionnaire}/questions/{question}/questionOptions/store', 'store')->name('options.store');
+    Route::patch('/questionnaires/{questionnaire}/questions/{question}/questionOptions/update/{option}', 'update')->name('options.update');
+    Route::delete('/questionnaires/{questionnaire}/questions/{question}/questionOptions/delete/{option}', 'destroy')->name('options.destroy');
 });
 
 Route::controller(ColumnValueController::class)->group(function () {
