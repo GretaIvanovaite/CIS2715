@@ -9,6 +9,7 @@ use App\Http\Controllers\QuestionController;
 use App\Http\Controllers\OptionController;
 use App\Http\Controllers\ColumnValueController;
 use App\Http\Controllers\RangeSliderController;
+use App\Http\Controllers\ResponseController;
 
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
@@ -32,7 +33,7 @@ Route::controller(QuestionnaireController::class)->middleware(['auth', 'role:use
     Route::patch('/questionnaires/status/{questionnaire}', 'status')->name('questionnaires.status');
     Route::delete('/questionnaires/delete/{questionnaire}', 'destroy')->name('questionnaires.destroy');
 });
-    Route::get('/questionnaires/show/{questionnaire}', [QuestionnaireController::class, 'show'])->name('questionnaires.show');
+    Route::get('/questionnaires/view/{questionnaire}', [QuestionnaireController::class, 'show'])->name('questionnaires.show');
 
 Route::controller(QuestionController::class)->middleware(['auth', 'role:user'])->group(function () {
     Route::get('/questionnaires/{questionnaire}/questions/create/', 'create')->name('questions.create');
@@ -67,5 +68,7 @@ Route::controller(RangeSliderController::class)->middleware(['auth', 'role:user'
     Route::patch('/questionnaires/{questionnaire}/questions/{question}/range/update/{range}', 'update')->name('range.update');
     Route::delete('/questionnaires/{questionnaire}/questions/{question}/range/delete/{range}', 'destroy')->name('range.destroy');
 });
+
+Route::get('/questionnaires/view/{questionnaire}/store', [ResponseController::class, 'store'])->name('responses.store');
 
 

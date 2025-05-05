@@ -25,7 +25,7 @@ class ResponseController extends Controller
     {
         Response::create($request->validated());
 
-        return redirect()->route('questionnaires.thankyou', $questionnaire->id)->with('success', 'Your response has been submitted successfully!');
+        return redirect()->route('questionnaires.show', $questionnaire->id);
     }
 
     /**
@@ -34,6 +34,6 @@ class ResponseController extends Controller
     public function destroy(Questionnaire $questionnaire, Response $response)
     {
         $option->delete();
-        return redirect()->route('questionnaires.opt_out', $questionnaire->id)->with('success', 'Your response has been deleted successfully!');
+        return redirect()->route('cancel', $questionnaire->id)->with('success', 'Your response has been deleted successfully!');
     }
 }

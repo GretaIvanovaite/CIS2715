@@ -9,9 +9,14 @@
         @endguest
         @auth
             @if (Route::currentRouteName() !== 'dashboard')
-                <li class="hover:bg-darkgreen hover:text-white px-2 py-4 active:bg-brightgreen active:text-black"><a href="/user/dashboard">User Dashboard</a></li>
+                <li class="hover:bg-darkgreen hover:text-white px-2 py-4 active:bg-brightgreen active:text-black"><a href={{route('dashboard')}}>User Dashboard</a></li>
             @endif
-            <li class="hover:bg-darkgreen hover:text-white px-2 py-4 active:bg-brightgreen active:text-black"><a href="/user/logout">Logout</a></li>
+            <li class="hover:bg-darkgreen hover:text-white px-2 py-4 active:bg-brightgreen active:text-black">
+                <form action={{route('logout')}} method="POST">
+                    @csrf
+                    <button class="cursor-pointer hover:bg-darkgreen hover:text-white">Logout</button>
+                </form>
+            </li>
         @endauth
     </ul>
 </nav>

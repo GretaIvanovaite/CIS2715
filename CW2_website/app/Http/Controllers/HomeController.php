@@ -12,4 +12,14 @@ class HomeController extends Controller
         $questionnaires = Questionnaire::where('status', '=', 'Live')->get();
         return view('home')->with('questionnaires', $questionnaires);
     }
+
+    public function thankyou()
+    {
+        return view('thankyou');
+    }
+
+    public function cancel()
+    {
+        return view('cancel');
+    }
 }
