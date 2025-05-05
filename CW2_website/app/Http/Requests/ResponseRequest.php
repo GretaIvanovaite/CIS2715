@@ -4,14 +4,14 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class ColumnValueRequest extends FormRequest
+class ResponseRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
      */
     public function authorize(): bool
     {
-        return true;
+        return false;
     }
 
     /**
@@ -21,14 +21,8 @@ class ColumnValueRequest extends FormRequest
      */
     public function rules(): array
     {
-        if ($this->isMethod('PATCH')) {
-            return [
-                'text' => 'required|string|max:255',
-            ];
-        }
         return [
-            'text' => 'required|string|max:255',
-            'question_id' => 'required|integer',
+            //
         ];
     }
 }

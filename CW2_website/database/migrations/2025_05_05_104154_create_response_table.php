@@ -11,11 +11,14 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('column_values', function (Blueprint $table) {
+        Schema::create('responses', function (Blueprint $table) {
             $table->increments('id')->unsigned();
-            $table->text('text');
             $table->unsignedInteger('question_id');
                 $table->foreign('question_id')->references('id')->on('questions')->onDelete('cascade');
+            $table->unsignedInteger('option_id');
+                $table->foreign('option_id')->references('id')->on('question_options')->onDelete('cascade');
+            $table->string('selection');
+            $table->longtext('text_answer');
             $table->timestamps();
         });
     }
@@ -25,6 +28,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('column_values');
+        Schema::dropIfExists('response');
     }
 };

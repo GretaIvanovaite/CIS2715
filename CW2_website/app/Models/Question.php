@@ -12,6 +12,7 @@ class Question extends Model
     protected $fillable = [
         'type',
         'text',
+        'required',
         'questionnaire_id',
     ];
 
@@ -28,6 +29,11 @@ class Question extends Model
     }
 
     public function sliderValue(){
-        return $this->hasMany(SliderValue::class)->chaperone();
+        return $this->hasOne(SliderValue::class)->chaperone();
     }
+
+    public function responses(){
+        return $this->hasMany(Response::class, 'question_id')->chaperone();
+    }
+
 }

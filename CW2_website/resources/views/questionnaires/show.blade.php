@@ -7,7 +7,8 @@
 @section('main-content')
     <h2 class="text-lg md:text-xl pb-4 m-2 font-bold">{{$questionnaire->title}}</h2>
     <p class="m-2">{{$questionnaire->description}}</p>
-    @if ($questionnaire->status != 'Live') {{--&& $questionnaire->user_id == $auth()->user()->id)--}}
+    <em class="m-2">{{$questionnaire->consent}}</em>
+    @if ($questionnaire->status != 'Live' && $questionnaire->user_id == auth()->id())
         <section class="flex flex-col items-start">
             <a class="cursor-pointer bg-brightgreen text-black font-semibold text-sm md:text-base uppercase rounded-lg p-2 hover:bg-darkgreen hover:text-white hover:font-bold active:scale-95 transition-transform transform m-2 mt-6 min-w-auto max-w-sm text-center justify-self-end-safe" href="{{ route('questionnaires.edit', $questionnaire->id) }}">Edit questionnaire details</a>
             <a class="cursor-pointer bg-brightgreen text-black font-semibold text-sm md:text-base uppercase rounded-lg p-2 hover:bg-darkgreen hover:text-white hover:font-bold active:scale-95 transition-transform transform m-2 mt-6 min-w-auto max-w-sm text-center justify-self-end-safe" href="{{ route('questions.create', $questionnaire->id) }}">New question</a>
@@ -17,6 +18,7 @@
     @php
         $question_number = 1
     @endphp
+    <form>
     @forelse ($questions as $question)
         <article class="bg-white border border-darkgreen rounded-md mx-2 mt-6 p-5 lg:max-w-4/5">
             <h3 class="text-base md:text-lg mb-4">{{$question_number}}. {{$question->text}}</h3>
@@ -65,7 +67,7 @@
                             @endphp
                             <p class="text-sm md:text-base self-center justify-self-start col-1 row-{{$rowNumber + 1}} pr-5 my-1 md:my-3">{{$row->text}}</p>
                             @foreach ($question->columnValues as $column)
-                                <input type="radio" aria-label="{{$row->text}} - Option {{$loop->iteration}}" id="question{{$question_number}}-row{{$rowNumber}}-option{{$loop->iteration}}" name="question{{$question_number}}-row{{$rowNumber}}-option{{$loop->iteration}}" class="min-h-4 h-2/5 w-auto aspect-square mx-1 md:mx-3 row-{{$rowNumber + 1}} col-{{$loop->iteration + 1}} justify-self-center-safe self-center-safe">
+                                <input type="radio" aria-label="{{$row->text}} - Option {{$loop->iteration}}" id="question{{$question_number}}-row{{$rowNumber}}-option{{$loop->iteration}}" name="question{{$question_number}}-row{{$rowNumber}}" class="min-h-4 h-2/5 w-auto aspect-square mx-1 md:mx-3 row-{{$rowNumber + 1}} col-{{$loop->iteration + 1}} justify-self-center-safe self-center-safe">
                             @endforeach
                         @endforeach
                     </section>
@@ -81,7 +83,7 @@
                 $question_number += 1
             @endphp
         </article>
-        @if ($questionnaire->status != 'Live') {{--&& $questionnaire->user_id == $auth()->user()->id)--}}
+        @if ($questionnaire->status != 'Live' && $questionnaire->user_id == auth()->id())
             <article id="actions" class="flex justify-between mb-6 px-2 lg:max-w-4/5">
                 <div class="max-w-8/10 h-auto flex">
                     <a class="cursor-pointer bg-brightgreen text-black font-semibold text-sm md:text-base uppercase rounded-lg p-2 hover:bg-darkgreen hover:text-white hover:font-bold active:scale-95 transition-transform transform self-center min-w-auto text-center justify-self-end-safe self-center mt-3 mb-6 mr-2" href="{{ route('questions.edit', [$questionnaire, $question]) }}">Edit question</a>
@@ -104,7 +106,7 @@
                             @endif
                             @break
                         @case('Range')
-                            <a class="cursor-pointer bg-brightgreen text-black font-semibold text-sm md:text-base uppercase rounded-lg p-2 hover:bg-darkgreen hover:text-white hover:font-bold active:scale-95 transition-transform transform self-center min-w-auto text-center justify-self-end-safe self-center mt-3 mb-6 mr-2" href="{{ route('range.edit', [$questionnaire->id, $question->id, $question->sliderValue]) }}">Edit range values</a>
+                            <a class="cursor-pointer bg-brightgreen text-black font-semibold text-sm md:text-base uppercase rounded-lg p-2 hover:bg-darkgreen hover:text-white hover:font-bold active:scale-95 transition-transform transform self-center min-w-auto text-center justify-self-end-safe self-center mt-3 mb-6 mr-2" href="{{ route('range.edit', [$questionnaire->id, $question->id, $question->sliderValue->id]) }}">Edit range values</a>
                             @break
                     @endswitch
                 </div>
@@ -118,5 +120,9 @@
     @empty
         <p class="m-2 text-sm md:text-base">This questionnaire has no questions.</p>
     @endforelse
+    @if ($questionnaire->status == 'Live')
+        <button class="cursor-pointer bg-brightgreen text-black font-semibold text-sm md:text-base uppercase rounded-lg p-2 hover:bg-darkgreen hover:text-white hover:font-bold active:scale-95 transition-transform transform self-center min-w-auto text-center justify-self-end-safe self-center mt-3 mb-6 mr-2">Submit answers</button>
+    @endif
+    </form>
     </section>
 @endsection

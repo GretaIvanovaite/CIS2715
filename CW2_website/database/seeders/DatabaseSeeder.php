@@ -26,6 +26,8 @@ class DatabaseSeeder extends Seeder
             QuestionTableSeeder::class,
             QuestionOptionTableSeeder::class,
             ColumnValueTableSeeder::class,
+            SliderValueTableSeeder::class,
+            ResponseTableSeeder::class,
         ]);
     }
 }

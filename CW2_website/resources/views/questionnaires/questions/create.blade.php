@@ -7,7 +7,7 @@
 @section('main-content')
     <small><a class="text-darkgreen hover:underline mb-5" href="{{ route('questionnaires.show', $questionnaire->id) }}">Back to the questionnaire</a></small>
    <section id='create_question' class="flex flex-col w-full lg:w-1/2 mx-auto p-8 lg:p-10 rounded-2xl shadow-xl bg-white">
-        <h2 class="text-lg md:text-xl font-bold pb-8 my-auto">Please enter your question details</h2>
+        <h2 class="text-lg md:text-xl font-bold pb-8 my-auto">Please enter the details below</h2>
         <form class="flex flex-col" id="question_form" method="POST" action="{{ route('questions.store', $questionnaire->id) }}">
             @csrf
             <label for="text" class="block mb-2 text-sm md:text-base font-medium text-black">Question text</label>
@@ -28,6 +28,10 @@
                 <option value="Grid">Multi-choice grid/matrix question</option>
                 <option value="Range">Range value question with a slider</option>
             </select>
+            <section class="py-2 m-2 flex justify-start content-center flex-wrap items-center">
+                <input type="checkbox" name="required" id="required" value="Y" class="min-h-4 h-full w-auto aspect-square mr-1 md:mr-3 align-middle">
+                <label for="again" class="inline-block text-sm md:text-base align-middle self-center">Required?</label>
+            </section>
             <input type="hidden" name="questionnaire_id" id="questionnaire_id" value={{$questionnaire->id}} required>
             <button type="submit" class="cursor-pointer bg-brightgreen text-black font-semibold text-sm md:text-base uppercase rounded-lg p-2 hover:bg-darkgreen hover:text-white hover:font-bold active:scale-95 transition-transform transform m-2 self-center min-w-1/5 max-w-9/10">Create</button>
         </form>

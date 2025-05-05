@@ -20,6 +20,7 @@ class QuestionnaireFactory extends Factory
         return [
             'title' => $this->faker->sentence(),
             'description' => $this->faker->paragraph(),
+            'consent' => $this->faker->paragraph(),
             'status' => $this->faker->randomElement($acceptedStatus),
         ];
     }

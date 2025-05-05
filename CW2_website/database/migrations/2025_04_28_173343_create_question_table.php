@@ -15,6 +15,7 @@ return new class extends Migration
             $table->increments('id')->unsigned();
             $table->string('type');
             $table->longtext('text');
+            $table->string('required');
             $table->unsignedInteger('questionnaire_id');
                 $table->foreign('questionnaire_id')->references('id')->on('questionnaires')->onDelete('cascade');
             $table->timestamps();

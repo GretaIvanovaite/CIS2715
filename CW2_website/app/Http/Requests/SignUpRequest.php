@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class ColumnValueRequest extends FormRequest
+class SignUpRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -21,14 +21,10 @@ class ColumnValueRequest extends FormRequest
      */
     public function rules(): array
     {
-        if ($this->isMethod('PATCH')) {
-            return [
-                'text' => 'required|string|max:255',
-            ];
-        }
         return [
-            'text' => 'required|string|max:255',
-            'question_id' => 'required|integer',
+            'name' => 'required',
+            'email' => 'required|email|unique:users',
+            'password' => 'required|min:6|confirmed',
         ];
     }
 }

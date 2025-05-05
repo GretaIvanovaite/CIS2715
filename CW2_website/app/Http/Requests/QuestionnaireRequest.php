@@ -44,6 +44,7 @@ class QuestionnaireRequest extends FormRequest
         return [
             'title' => 'unique:questionnaires|required|string|max:255',
             'description' => 'nullable|string',
+            'consent' => 'nullable|string',
             'status' => ['required', 'string', Rule::in($acceptedStatus)],
             'user_id' => 'required|integer',
         ];

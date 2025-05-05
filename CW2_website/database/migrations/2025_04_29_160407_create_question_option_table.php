@@ -12,7 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('question_options', function (Blueprint $table) {
-            $table->id();
+            $table->increments('id')->unsigned();
             $table->mediumtext('text');
             $table->unsignedInteger('question_id');
                 $table->foreign('question_id')->references('id')->on('questions')->onDelete('cascade');

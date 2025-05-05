@@ -46,7 +46,8 @@ class QuestionnaireController extends Controller
      */
     public function show(Questionnaire $questionnaire)
     {
-        $questions = Question::where('questionnaire_id', $questionnaire->id)->withCount(['questionOptions', 'columnValues'])->get();
+        $questions = Question::where('questionnaire_id', $questionnaire->id)->withCount(['questionOptions', 'columnValues', 'responses'])->get();
+    
         return view('questionnaires.show', compact('questionnaire', 'questions'));
     }
 
@@ -81,7 +82,7 @@ class QuestionnaireController extends Controller
      */
     public function destroy(Questionnaire $questionnaire)
     {
-        $questionnaire->question->each->delete();
+        $questionnaire->questions->each->delete();
         $questionnaire->delete();
         return redirect()->route('dashboard')->with('success', 'Questionnaire deleted successfully!');
     }

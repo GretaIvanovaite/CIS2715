@@ -15,7 +15,7 @@ class ColumnValueController extends Controller
     */
     public function show(Questionnaire $questionnaire, Question $question)
     {
-        return view('questionnaires.questions.columns.show', compact('questionnaire', 'question'));
+        return view('questionnaires.questions.columnValues.show', compact('questionnaire', 'question'));
     }
 
     /**
@@ -23,7 +23,7 @@ class ColumnValueController extends Controller
      */
     public function create(Questionnaire $questionnaire, Question $question)
     {
-        return view('questionnaires.questions.columns.create', compact('questionnaire', 'question'));
+        return view('questionnaires.questions.columnValues.create', compact('questionnaire', 'question'));
     }
 
     /**
@@ -33,11 +33,10 @@ class ColumnValueController extends Controller
     {
         ColumnValue::create($request->validated());
 
-        return redirect()->route('questionnaires.show', $questionnaire->id)->with('success', 'Question column created successfully!');
         if ($request->again == 'Y')
-            return view('questionnaires.questions.columns.create', compact('questionnaire', 'question'))->with('success', 'Column value added successfully!');
+            return view('questionnaires.questions.columnValues.create', compact('questionnaire', 'question'))->with('success', 'Column value added successfully!');
         else
-            return redirect()->route('questionnaires.show', $questionnaire->id)->with('success', 'Column value created successfully!');
+            return view('questionnaires.questions.questionOptions.create', compact('questionnaire', 'question'))->with('success', 'Column values created successfully!');
     }
 
     /**
@@ -45,7 +44,7 @@ class ColumnValueController extends Controller
      */
     public function edit(Questionnaire $questionnaire, Question $question, ColumnValue $column)
     {
-        return view('questionnaires.questions.columns.edit', compact('questionnaire', 'question', 'column'));
+        return view('questionnaires.questions.columnValues.edit', compact('questionnaire', 'question', 'column'));
     }
 
     /**

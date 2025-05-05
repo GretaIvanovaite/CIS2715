@@ -29,7 +29,7 @@
                                 <th scope="row" class="font-semibold text-left p-2 text-pretty">{{$questInstance->title}}</th>
                                 <td class="text-sm md:text-base text-left p-2 text-pretty wrap-break-word">{{$questInstance->description}}</td>
                                 <td class="text-sm md:text-base text-center p-2 text-pretty font-semibold">{{$questInstance->status}}</td>
-                                <td class="text-sm md:text-base text-center p-2 text-pretty"> Responses </td>
+                                <td class="text-sm md:text-base text-center p-2 text-pretty">{{ $questInstance->responses_count }}</td>
                                 <td class="text-sm md:text-base p-2 justify-items-center flex flex-col">
                                     @if ($questInstance->status == 'Live')
                                         <a class="cursor-pointer bg-brightgreen text-black font-semibold text-sm md:text-base uppercase rounded-lg p-2 hover:bg-darkgreen hover:text-white hover:font-bold active:scale-95 transition-transform transform m-2 self-center min-w-3/5 max-w-9/10 text-center w-4/5" href="{{ route('questionnaires.show', $questInstance->id) }}">Respondent view</a>
@@ -47,6 +47,9 @@
                                             <button class="cursor-pointer bg-brightgreen text-black font-semibold text-sm md:text-base uppercase rounded-lg p-2 hover:bg-darkgreen hover:text-white hover:font-bold active:scale-95 transition-transform transform m-2 self-center min-w-3/5 max-w-9/10 text-center w-4/5">Make live</button>
                                         </form>
                                         <a class="cursor-pointer bg-brightgreen text-black font-semibold text-sm md:text-base uppercase rounded-lg p-2 hover:bg-darkgreen hover:text-white hover:font-bold active:scale-95 transition-transform transform m-2 self-center min-w-3/5 max-w-9/10 text-center w-4/5" href="{{ route('questionnaires.show', $questInstance->id) }}">Edit</a>
+                                    @endif
+                                    @if ($questInstance->responses_count > 0)
+                                        <a class="cursor-pointer bg-brightgreen text-black font-semibold text-sm md:text-base uppercase rounded-lg p-2 hover:bg-darkgreen hover:text-white hover:font-bold active:scale-95 transition-transform transform m-2 self-center min-w-3/5 max-w-9/10 text-center w-4/5" href="">See responses</a>
                                     @endif
                                     <form action="{{ route('questionnaires.destroy', $questInstance->id) }}" method="POST" onsubmit="return confirm('Are you sure you want to delete this questionnaire?');" class="w-full flex justify-center">
                                         @csrf

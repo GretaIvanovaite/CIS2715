@@ -26,11 +26,13 @@ class QuestionRequest extends FormRequest
         if ($this->isMethod('PATCH')) {
             return [
                 'text' => 'required|string|max:255',
+                'required' => 'nullable|required|string|max:255',
             ];
         }
         return [
             'text' => 'required|string|max:255',
             'type' => ['required', Rule::in($acceptedTypes)],
+            'required' => 'nullable|required|string|max:255',
             'questionnaire_id' => 'required|integer',
         ];
     }

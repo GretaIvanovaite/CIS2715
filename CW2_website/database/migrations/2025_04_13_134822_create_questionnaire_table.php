@@ -15,9 +15,10 @@ return new class extends Migration
             $table->increments('id')->unsigned();
             $table->string('title');
             $table->longtext('description');
+            $table->longtext('consent');
             $table->string('status');
             $table->unsignedInteger('user_id');
-                $table->foreign('user_id')->references('id')->on('users');
+                $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');;
             $table->timestamps();
         });
     }

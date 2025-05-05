@@ -12,8 +12,8 @@ class DashboardController extends Controller
      */
     public function index()
     {
-        //$questionnaires = Questionnaire::where('user_id', '=', $userID)->get();
-        $questionnaires = Questionnaire::all();
+        $user_id = auth()->id();
+        $questionnaires = Questionnaire::where('user_id', $user_id)->withCount(['responses'])->get();
         return view('user.dashboard')->with('questionnaires', $questionnaires);
     }
 }

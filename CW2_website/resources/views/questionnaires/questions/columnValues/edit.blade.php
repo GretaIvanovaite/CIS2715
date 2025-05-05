@@ -7,7 +7,7 @@
 @section('main-content')
     <small><a class="text-darkgreen hover:underline mb-5" href="{{ route('questionnaires.show', $questionnaire->id) }}">Back to the questionnaire</a></small>
    <section id='create_question' class="flex flex-col w-full lg:w-1/2 mx-auto p-8 lg:p-10 rounded-2xl shadow-xl bg-white">
-        <h2 class="text-lg md:text-xl font-bold pb-8 my-auto">Please edit the question column value below</h2>
+        <h2 class="text-lg md:text-xl font-bold pb-8 my-auto">Please edit the details below</h2>
         <form class="flex flex-col" id="column_form" method="POST" action="{{ route('columns.update', [$questionnaire->id, $question->id, $column->id]) }}">
             @csrf
             @method('PATCH')
