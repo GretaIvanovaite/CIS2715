@@ -5,6 +5,7 @@
 
 
 @section('main-content')
+    <small><a class="text-darkgreen hover:underline mb-5" href="{{ route('questionnaires.show', $questionnaire->id) }}">Back to the questionnaire</a></small>
     <h2 class="text-lg md:text-xl pb-4 m-2 font-bold">Please review the column values</h2>
     <p class="text-base md:text-lg mb-4 col-span-3 font-semibold m-2">Question: {{$question->text}}</p>
     <a class="cursor-pointer bg-brightgreen text-black font-semibold text-sm md:text-base uppercase rounded-lg p-2 hover:bg-darkgreen hover:text-white hover:font-bold active:scale-95 transition-transform transform min-w-auto text-center justify-self-end-safe self-center m-2 mb-6" href="{{ route('columns.create', [$questionnaire->id, $question->id]) }}">Add a column value</a>

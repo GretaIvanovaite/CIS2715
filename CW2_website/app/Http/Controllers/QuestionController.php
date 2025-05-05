@@ -26,6 +26,10 @@ class QuestionController extends Controller
 
         if ($request->type == 'Short-text' || $request->type == 'Long-text')
             return redirect()->route('questionnaires.show', $questionnaire->id)->with('success', 'Question created successfully!');
+        elseif ($request->type == 'Grid')
+            return redirect()->route('columns.create', compact('questionnaire', 'question'))->with('success', 'Question created successfully!');
+        elseif ($request->type == 'Range')
+            return redirect()->route('range.create', compact('questionnaire', 'question'))->with('success', 'Question created successfully!');
         else
             return redirect()->route('options.create', compact('questionnaire', 'question'))->with('success', 'Question created successfully!');
     }
