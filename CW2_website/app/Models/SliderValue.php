@@ -13,6 +13,7 @@ class SliderValue extends Model
         'min',
         'max',
         'step',
+        'question_id',
     ];
 
     public function question(){

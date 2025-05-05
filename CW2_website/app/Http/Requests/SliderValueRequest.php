@@ -21,10 +21,18 @@ class SliderValueRequest extends FormRequest
      */
     public function rules(): array
     {
+        if ($this->isMethod('PATCH')) {
+            return [
+                'min' => 'required|integer',
+                'max' => 'required|integer',
+                'step' => 'nullable|integer',
+            ];
+        }
         return [
             'min' => 'required|integer',
             'max' => 'required|integer',
             'step' => 'nullable|integer',
+            'question_id' => 'required|integer',
         ];
     }
 }

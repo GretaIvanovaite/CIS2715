@@ -21,6 +21,11 @@ class QuestionOptionRequest extends FormRequest
      */
     public function rules(): array
     {
+        if ($this->isMethod('PATCH')) {
+            return [
+                'text' => 'required|string|max:255',
+            ];
+        }
         return [
             'text' => 'required|string|max:255',
             'question_id' => 'required|integer',

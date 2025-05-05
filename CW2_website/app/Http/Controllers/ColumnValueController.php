@@ -11,11 +11,19 @@ Use App\Models\Questionnaire;
 class ColumnValueController extends Controller
 {
     /**
+    * Display the specified resource.
+    */
+    public function show(Questionnaire $questionnaire, Question $question)
+    {
+        return view('questionnaires.questions.columns.show', compact('questionnaire', 'question'));
+    }
+
+    /**
      * Show the form for creating a new resource.
      */
     public function create(Questionnaire $questionnaire, Question $question)
     {
-        return view('questionnaires.questions.columns.create', compact('question'));
+        return view('questionnaires.questions.columns.create', compact('questionnaire', 'question'));
     }
 
     /**
@@ -26,6 +34,10 @@ class ColumnValueController extends Controller
         ColumnValue::create($request->validated());
 
         return redirect()->route('questionnaires.show', $questionnaire->id)->with('success', 'Question column created successfully!');
+        if ($request->again == 'Y')
+            return view('questionnaires.questions.columns.create', compact('questionnaire', 'question'))->with('success', 'Column value added successfully!');
+        else
+            return redirect()->route('questionnaires.show', $questionnaire->id)->with('success', 'Column value created successfully!');
     }
 
     /**
@@ -33,7 +45,7 @@ class ColumnValueController extends Controller
      */
     public function edit(Questionnaire $questionnaire, Question $question, ColumnValue $column)
     {
-        return view('questionnaires.questions.columns.edit', compact('question'));
+        return view('questionnaires.questions.columns.edit', compact('questionnaire', 'question', 'column'));
     }
 
     /**
@@ -42,7 +54,8 @@ class ColumnValueController extends Controller
     public function update(Questionnaire $questionnaire, Question $question, ColumnValue $column, ColumnValueRequest $request)
     {
         $column->update($request->validated());
-        return redirect()->route('questionnaires.show', $questionnaire->id)->with('success', 'Question column updated successfully!');
+
+        return redirect()->route('columns.show', compact('questionnaire', 'question', 'column'))->with('success', 'Column value updated successfully!');
     }
 
     /**
@@ -51,7 +64,7 @@ class ColumnValueController extends Controller
     public function destroy(Questionnaire $questionnaire, Question $question, ColumnValue $column)
     {
         $column->delete();
-        return redirect()->route('questionnaires.show', $questionnaire->id)->with('success', 'Question column deleted successfully!');
+        return redirect()->route('columns.show', compact('questionnaire', 'question'))->with('success', 'Column value deleted successfully!');
     }
 }
 

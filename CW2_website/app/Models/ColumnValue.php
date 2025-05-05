@@ -11,6 +11,7 @@ class ColumnValue extends Model
 
     protected $fillable = [
         'text',
+        'question_id',
     ];
 
     public function question(){
